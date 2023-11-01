@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+Color1
+  100: "#fff9c4", // MaterialUI yellow-100 - time
+  300: "#fff176", // MaterialUI yellow-300 - time
+  500: "#ffeb3b", // MaterialUI yellow-500 - time
+  700: "#fbc02d", // MaterialUI yellow-700 - time
+  900: "#f57f17", // MaterialUI yellow-900 - time
+  950: "#3E3800", // Paletton.com presets Dark Neon, darkest one using #ffeb3b as base color
+-->
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
-    <color name="text">@color/black</color>
+    <color name="color1_100">#fff9c4</color>
+    <color name="color1_300">#fff176</color>
+    <color name="color1_500">#ffeb3b</color>
+    <color name="color1_700">#fbc02d</color>
+    <color name="color1_900">#f57f17</color>
+    <color name="color1_950">#3E3800</color>
+    <color name="text">@color/color1_950</color>
 </resources>
