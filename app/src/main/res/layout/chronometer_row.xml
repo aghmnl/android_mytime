@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:paddingVertical="2dp"
+    android:paddingHorizontal="10dp"
+    app:flow_verticalAlign="center">
+
+    <Chronometer
+        android:id="@+id/chronometer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:textSize="16sp" />
+
+    <ImageButton
+        android:id="@+id/startStopButton"
+        android:contentDescription="@string/stop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_play"
+        android:background="@android:color/transparent"
+        android:minWidth="50dp"
+        android:minHeight="50dp"/>
+
+</LinearLayout>

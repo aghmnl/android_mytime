@@ -55,7 +55,7 @@
         android:contentDescription="@string/stop"
         android:minWidth="50dp"
         android:minHeight="50dp"
-        android:src="@drawable/device_reset_24px"
+        android:src="@drawable/ic_reset"
         app:layout_constraintBottom_toBottomOf="@+id/progressBarBackground"
         app:layout_constraintStart_toEndOf="@+id/startPauseButton"
         app:layout_constraintTop_toTopOf="@+id/progressBarBackground"
@@ -72,6 +72,30 @@
         app:layout_constraintStart_toStartOf="@+id/progressBarBackground"
         app:layout_constraintTop_toTopOf="@+id/progressBarBackground"
         app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/baseline_play_arrow_24" />
+        app:srcCompat="@drawable/ic_play" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/progressBarBackground" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.95"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias=".95"
+        app:srcCompat="@drawable/ic_add" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

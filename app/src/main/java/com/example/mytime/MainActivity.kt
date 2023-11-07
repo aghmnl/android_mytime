@@ -2,11 +2,15 @@ package com.example.mytime
 
 import android.os.Bundle
 import android.os.SystemClock
+import android.view.LayoutInflater
 import android.widget.Chronometer
 import android.widget.ImageButton
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MainActivity : AppCompatActivity() {
 
@@ -14,6 +18,11 @@ class MainActivity : AppCompatActivity() {
     private lateinit var chronometer: Chronometer
     private lateinit var startPauseButton: ImageButton
     private lateinit var resetButton: ImageButton
+
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var floatingActionButton: FloatingActionButton
+    private val chronometers = mutableListOf<Pair<Chronometer, ImageButton>>()
+
 
     // Declare and initialize variables for the start state and elapsed time
     private var start = true
@@ -35,14 +44,14 @@ class MainActivity : AppCompatActivity() {
                 chronometer.base = SystemClock.elapsedRealtime() - elapsedTime
                 chronometer.start()
                 start = false
-                startPauseButton.setImageResource(R.drawable.baseline_pause_24)
+                startPauseButton.setImageResource(R.drawable.ic_pause)
                 startPauseButton.contentDescription = getString(R.string.stop)
             } else {
                 // If the start variable is false, stop the chronometer and save the elapsed time
                 elapsedTime = SystemClock.elapsedRealtime() - chronometer.base
                 chronometer.stop()
                 start = true
-                startPauseButton.setImageResource(R.drawable.baseline_play_arrow_24)
+                startPauseButton.setImageResource(R.drawable.ic_play)
                 startPauseButton.contentDescription = getString(R.string.start)
             }
         }
@@ -54,7 +63,7 @@ class MainActivity : AppCompatActivity() {
             chronometer.stop()
             elapsedTime = 0L
             start = true
-            startPauseButton.setImageResource(R.drawable.baseline_play_arrow_24)
+            startPauseButton.setImageResource(R.drawable.ic_play)
             startPauseButton.contentDescription = getString(R.string.start)
         }
 
@@ -73,9 +82,34 @@ class MainActivity : AppCompatActivity() {
                 chronometer.stop()
                 elapsedTime = 0L
                 start = true
-                startPauseButton.setImageResource(R.drawable.baseline_play_arrow_24)
+                startPauseButton.setImageResource(R.drawable.ic_play)
                 startPauseButton.contentDescription = getString(R.string.start)
             }
+        }
+
+        recyclerView = findViewById(R.id.recyclerView)
+        floatingActionButton = findViewById(R.id.floatingActionButton)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.adapter = ChronometerAdapter(chronometers)
+
+        floatingActionButton.setOnClickListener {
+            val inflater = LayoutInflater.from(this)
+            val view = inflater.inflate(R.layout.chronometer_row, recyclerView, false)
+            val chronometer = view.findViewById<Chronometer>(R.id.chronometer)
+            val startStopButton = view.findViewById<ImageButton>(R.id.startStopButton)
+            startStopButton.setOnClickListener {
+                if (chronometer.isCounting) {
+                    chronometer.stop()
+                    startStopButton.contentDescription = getString(R.string.start)
+                    startStopButton.setImageResource(R.drawable.ic_play) // Set the play icon
+                } else {
+                    chronometer.start()
+                    startStopButton.contentDescription = getString(R.string.stop)
+                    startStopButton.setImageResource(R.drawable.ic_stop) // Set the stop icon
+                }
+            }
+            chronometers.add(Pair(chronometer, startStopButton))
+            recyclerView.adapter?.notifyItemInserted(chronometers.size - 1)
         }
     }
 }
