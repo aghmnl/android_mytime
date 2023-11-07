@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity() {
                 chronometer.start()
                 start = false
                 startPauseButton.setImageResource(R.drawable.ic_pause)
-                startPauseButton.contentDescription = getString(R.string.stop)
+                startPauseButton.contentDescription = getString(R.string.pause)
             } else {
                 // If the start variable is false, stop the chronometer and save the elapsed time
                 elapsedTime = SystemClock.elapsedRealtime() - chronometer.base
@@ -97,17 +97,7 @@ class MainActivity : AppCompatActivity() {
             val view = inflater.inflate(R.layout.chronometer_row, recyclerView, false)
             val chronometer = view.findViewById<Chronometer>(R.id.chronometer)
             val startStopButton = view.findViewById<ImageButton>(R.id.startStopButton)
-            startStopButton.setOnClickListener {
-                if (chronometer.isCounting) {
-                    chronometer.stop()
-                    startStopButton.contentDescription = getString(R.string.start)
-                    startStopButton.setImageResource(R.drawable.ic_play) // Set the play icon
-                } else {
-                    chronometer.start()
-                    startStopButton.contentDescription = getString(R.string.stop)
-                    startStopButton.setImageResource(R.drawable.ic_stop) // Set the stop icon
-                }
-            }
+
             chronometers.add(Pair(chronometer, startStopButton))
             recyclerView.adapter?.notifyItemInserted(chronometers.size - 1)
         }

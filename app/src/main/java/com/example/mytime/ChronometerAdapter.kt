@@ -1,7 +1,6 @@
 package com.example.mytime
 
 import android.os.SystemClock
-import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,13 +8,11 @@ import android.widget.Chronometer
 import android.widget.ImageButton
 import androidx.recyclerview.widget.RecyclerView
 
-val Chronometer.isCounting: Boolean
-    get() = base <= SystemClock.elapsedRealtime()
-
 class ChronometerAdapter(private val chronometers: List<Pair<Chronometer, ImageButton>>) :
     RecyclerView.Adapter<ChronometerAdapter.ChronometerViewHolder>() {
-
     class ChronometerViewHolder(val view: View) : RecyclerView.ViewHolder(view)
+
+    override fun getItemCount() = chronometers.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChronometerViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -27,26 +24,29 @@ class ChronometerAdapter(private val chronometers: List<Pair<Chronometer, ImageB
         val chronometer = holder.view.findViewById<Chronometer>(R.id.chronometer)
         val startStopButton = holder.view.findViewById<ImageButton>(R.id.startStopButton)
 
-        chronometer.base = chronometers[position].first.base
-
-        chronometer.setOnChronometerTickListener {
-            // Update the chronometer's display
-            val elapsedMillis = SystemClock.elapsedRealtime() - chronometer.base
-            chronometer.text = DateUtils.formatElapsedTime(elapsedMillis / 1000)
-        }
+        // Declare and initialize variables for the start state and elapsed time
+        var start = true
+        var elapsedTime = 0L
 
         startStopButton.setOnClickListener {
-            if (chronometer.isCounting) {
-                chronometer.stop()
-                startStopButton.contentDescription = holder.view.context.getString(R.string.start)
-                startStopButton.setImageResource(R.drawable.ic_play) // Set the play icon
-            } else {
+            if (start) {
+                // If the start variable is true, start the chronometer
+                println("Starting $position")
+                chronometer.base = SystemClock.elapsedRealtime() - elapsedTime
                 chronometer.start()
-                startStopButton.contentDescription = holder.view.context.getString(R.string.stop)
-                startStopButton.setImageResource(R.drawable.ic_stop) // Set the stop icon
+                start = false
+                startStopButton.setImageResource(R.drawable.ic_pause) // Set the pause icon
+                startStopButton.contentDescription = holder.view.context.getString(R.string.pause)
+            } else {
+                // If the start variable is false, stop the chronometer and save the elapsed time
+                println("Stopping $position")
+                elapsedTime = SystemClock.elapsedRealtime() - chronometer.base
+                chronometer.stop()
+                start = true
+                startStopButton.setImageResource(R.drawable.ic_play) // Set the play icon
+                startStopButton.contentDescription = holder.view.context.getString(R.string.start)
             }
         }
     }
 
-    override fun getItemCount() = chronometers.size
 }
