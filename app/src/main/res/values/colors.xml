@@ -9,6 +9,7 @@ Color1
   950: "#3E3800", // Paletton.com presets Dark Neon, darkest one using #ffeb3b as base color
 -->
 <resources>
+    <color name="color1_50">#fffde7</color>
     <color name="color1_100">#fff9c4</color>
     <color name="color1_300">#fff176</color>
     <color name="color1_500">#ffeb3b</color>

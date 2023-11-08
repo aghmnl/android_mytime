@@ -1,29 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="horizontal"
-    android:paddingVertical="2dp"
-    android:paddingHorizontal="10dp"
-    app:flow_verticalAlign="center">
+    android:orientation="vertical">
 
-    <Chronometer
-        android:id="@+id/chronometer"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_weight="1"
-        android:textSize="16sp" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/color1_50" />
 
-    <ImageButton
-        android:id="@+id/startStopButton"
-        android:contentDescription="@string/stop"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_play"
-        android:background="@android:color/transparent"
-        android:minWidth="50dp"
-        android:minHeight="50dp"/>
+        android:orientation="horizontal"
+        android:paddingHorizontal="10dp"
+        app:flow_verticalAlign="center">
+
+        <ImageButton
+            android:id="@+id/startStopButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/stop"
+            android:minWidth="50dp"
+            android:minHeight="50dp"
+            android:src="@drawable/ic_play" />
+
+        <Chronometer
+            android:id="@+id/chronometer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingHorizontal="5dp"
+            android:minWidth="80dp"
+            android:textAlignment="textEnd"
+            android:textSize="16sp"
+            tools:ignore="RtlCompat" />
+
+        <EditText
+            android:id="@+id/editText"
+            style="@android:style/Widget.DeviceDefault.EditText"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginStart="10dp"
+            android:autofillHints="name"
+            android:background="@android:color/transparent"
+            android:text="@string/new_project"
+            android:hint="@string/new_project"
+            android:inputType="text"
+            android:maxWidth="200dp" />
+
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/color1_50" />
 
 </LinearLayout>
