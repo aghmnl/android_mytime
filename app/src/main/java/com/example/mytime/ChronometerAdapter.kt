@@ -62,7 +62,7 @@ class ChronometerAdapter(private val chronometers: MutableList<Triple<Long, Bool
             }
             // Save the state
             chronometers[position] = Triple(0, isCounting, editText.text.toString())
-            println("Base 0, isCounting $isCounting, editText ${editText.text.toString()} position $position")
+            println("Base 0, isCounting $isCounting, editText ${editText.text} position $position")
         }
     }
 }
