@@ -14,7 +14,6 @@ class MainActivity : AppCompatActivity() {
     // Code moved to other classes for better understanding
     private lateinit var mainChronometer: MainChronometer
     private lateinit var chronometerState: ChronometerState
-    private lateinit var secondaryChronometers: SecondaryChronometers
 
     // Declare variables for the chronometer, buttons and progressbar
     private lateinit var chronometer: Chronometer
@@ -26,10 +25,6 @@ class MainActivity : AppCompatActivity() {
 
     // Creates the list of chronometers
     private val chronometers = mutableListOf<Triple<Long, Boolean, String>>()
-
-    // Declare and initialize variables for the start state and elapsed time
-    internal var start = true
-    internal var elapsedTime = 0L
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,35 +39,29 @@ class MainActivity : AppCompatActivity() {
         floatingActionButton = findViewById(R.id.floatingActionButton)
 
         // Initialize the ChronometerState and the mainChronometer objects
-        mainChronometer = MainChronometer(this)
+        mainChronometer = MainChronometer(this, chronometer, startPauseButton, resetButton, progressBar)
         chronometerState = ChronometerState(this)
         recyclerView.layoutManager = LinearLayoutManager(this)
-        secondaryChronometers = SecondaryChronometers()
         recyclerView.adapter = ChronometerAdapter(chronometers)
 
         // Setting the listeners
-        mainChronometer.setStartPauseButtonClickListener(startPauseButton, chronometer)
-        mainChronometer.setResetButtonClickListener(resetButton, chronometer, startPauseButton)
-        mainChronometer.setChronometerTickListener(chronometer, progressBar, startPauseButton)
-        secondaryChronometers.setFloatingActionButtonClickListener(floatingActionButton, recyclerView, chronometers)
+        mainChronometer.setStartPauseButtonClickListener()
+        mainChronometer.setResetButtonClickListener()
+        mainChronometer.setChronometerTickListener()
+        floatingActionButton.setOnClickListener {
+            chronometers.add(Triple(0, false, ""))
+            recyclerView.adapter?.notifyItemInserted(chronometers.size - 1)
+        }
 
         // Restore the state from SharedPreferences
         chronometers.addAll(chronometerState.restoreState())
     }
-
-//    override fun onDestroy() {
-//        super.onDestroy()
-//
-//        // Save the state to SharedPreferences
-//        chronometerState.saveState(chronometers)
-//        println("SAVING THE STATE in onDestroy")
-//    }
 
     override fun onPause() {
         super.onPause()
 
         // Save the state to SharedPreferences
         chronometerState.saveState(chronometers)
-        println("SAVING THE STATE in onPause")
+//        println("SAVING THE STATE in onPause")
     }
 }

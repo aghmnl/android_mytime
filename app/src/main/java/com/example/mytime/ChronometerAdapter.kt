@@ -31,6 +31,7 @@ class ChronometerAdapter(private val chronometers: MutableList<Triple<Long, Bool
         var (elapsedTime, isCounting, text) = chronometers[position]
         chronometer.base = SystemClock.elapsedRealtime() - elapsedTime
 
+        // Depending on the isCounting state, initializes the chronometers
         editText.setText(text)
         if (isCounting) {
             chronometer.start()
@@ -44,16 +45,14 @@ class ChronometerAdapter(private val chronometers: MutableList<Triple<Long, Bool
 
         startStopButton.setOnClickListener {
             if (isCounting) {
-                // If the start variable is true, stop the chronometer and save the elapsed time
-                println("Stopping $position")
+                // Stops and saves the elapsed time
                 elapsedTime = SystemClock.elapsedRealtime() - chronometer.base
                 chronometer.stop()
                 isCounting = false
                 startStopButton.setImageResource(R.drawable.ic_play) // Set the play icon
                 startStopButton.contentDescription = holder.view.context.getString(R.string.start)
             } else {
-                // If the start variable is false, start the chronometer
-                println("Starting $position")
+                // Starts from the elapsed time
                 chronometer.base = SystemClock.elapsedRealtime() - elapsedTime
                 chronometer.start()
                 isCounting = true
@@ -61,8 +60,8 @@ class ChronometerAdapter(private val chronometers: MutableList<Triple<Long, Bool
                 startStopButton.contentDescription = holder.view.context.getString(R.string.pause)
             }
             // Save the state
-            chronometers[position] = Triple(0, isCounting, editText.text.toString())
-            println("Base 0, isCounting $isCounting, editText ${editText.text} position $position")
+            chronometers[position] = Triple(elapsedTime, isCounting, editText.text.toString())
+//            println("ElapsedTime $elapsedTime, isCounting $isCounting, editText ${editText.text} position $position")
         }
     }
 }

@@ -5,4 +5,5 @@
     <string name="reset">reset</string>
     <string name="pause">pause</string>
     <string name="new_project">New Project</string>
+    <string name="times_up">"Time's up!"</string>
 </resources>
