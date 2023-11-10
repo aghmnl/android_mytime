@@ -13,7 +13,10 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MainActivity : AppCompatActivity() {
 
-//     Declare variables for the chronometer and buttons
+    // Code moved to other classes for better understanding
+    private lateinit var mainChronometer: MainChronometer
+
+    //     Declare variables for the chronometer and buttons
     private lateinit var chronometer: Chronometer
     private lateinit var startPauseButton: ImageButton
     private lateinit var resetButton: ImageButton
@@ -25,8 +28,8 @@ class MainActivity : AppCompatActivity() {
 
 
     // Declare and initialize variables for the start state and elapsed time
-    private var start = true
-    private var elapsedTime = 0L
+    internal var start = true
+    internal var elapsedTime = 0L
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,35 +43,9 @@ class MainActivity : AppCompatActivity() {
         startPauseButton = findViewById(R.id.startPauseButton)
         resetButton = findViewById(R.id.resetButton)
 
-        // Set an onClickListener for the start/pause button
-        startPauseButton.setOnClickListener {
-            if (start) {
-                // If the start variable is true, start the chronometer
-                chronometer.base = SystemClock.elapsedRealtime() - elapsedTime
-                chronometer.start()
-                start = false
-                startPauseButton.setImageResource(R.drawable.ic_pause)
-                startPauseButton.contentDescription = getString(R.string.pause)
-            } else {
-                // If the start variable is false, stop the chronometer and save the elapsed time
-                elapsedTime = SystemClock.elapsedRealtime() - chronometer.base
-                chronometer.stop()
-                start = true
-                startPauseButton.setImageResource(R.drawable.ic_play)
-                startPauseButton.contentDescription = getString(R.string.start)
-            }
-        }
-
-        // Set an onClickListener for the reset button
-        resetButton.setOnClickListener {
-            // Reset the chronometer and the start state
-            chronometer.base = SystemClock.elapsedRealtime()
-            chronometer.stop()
-            elapsedTime = 0L
-            start = true
-            startPauseButton.setImageResource(R.drawable.ic_play)
-            startPauseButton.contentDescription = getString(R.string.start)
-        }
+        mainChronometer = MainChronometer(this)
+        mainChronometer.setStartPauseButtonClickListener(startPauseButton, chronometer)
+        mainChronometer.setResetButtonClickListener(resetButton, chronometer, startPauseButton)
 
         // Initialize the progress bar
         val progressBar = findViewById<ProgressBar>(R.id.progressBar)
@@ -108,8 +85,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        println("SAVING THE STATE2")
 
+        // Save the state to SharedPreferences
+        chronometerState.saveState(chronometers)
+        println("SAVING THE STATE in onDestroy")
     }
 
     override fun onPause() {
@@ -117,5 +96,6 @@ class MainActivity : AppCompatActivity() {
 
         // Save the state to SharedPreferences
         chronometerState.saveState(chronometers)
+        println("SAVING THE STATE in onPause")
     }
 }
