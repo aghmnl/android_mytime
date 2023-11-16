@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 class ChronometerAdapter(private val chronometers: MutableList<Triple<Long, Boolean, String>>) :
     RecyclerView.Adapter<ChronometerAdapter.ChronometerViewHolder>() {
 
-    class ChronometerViewHolder(val view: View) : RecyclerView.ViewHolder(view)
+    class ChronometerViewHolder(val view: View): RecyclerView.ViewHolder(view)
 
     override fun getItemCount() = chronometers.size
 
@@ -26,6 +26,7 @@ class ChronometerAdapter(private val chronometers: MutableList<Triple<Long, Bool
         val chronometer = holder.view.findViewById<Chronometer>(R.id.chronometer)
         val startStopButton = holder.view.findViewById<ImageButton>(R.id.startStopButton)
         val editText = holder.view.findViewById<EditText>(R.id.editText)
+        val removeButton = holder.view.findViewById<ImageButton>(R.id.removeButton)
 
         // Restore the state
         var (elapsedTime, isCounting, text) = chronometers[position]
@@ -33,15 +34,6 @@ class ChronometerAdapter(private val chronometers: MutableList<Triple<Long, Bool
 
         // Depending on the isCounting state, initializes the chronometers
         editText.setText(text)
-        if (isCounting) {
-            chronometer.start()
-            startStopButton.setImageResource(R.drawable.ic_pause) // Set the pause icon
-            startStopButton.contentDescription = holder.view.context.getString(R.string.pause)
-        } else {
-            chronometer.stop()
-            startStopButton.setImageResource(R.drawable.ic_play) // Set the play icon
-            startStopButton.contentDescription = holder.view.context.getString(R.string.start)
-        }
 
         startStopButton.setOnClickListener {
             if (isCounting) {
@@ -59,9 +51,33 @@ class ChronometerAdapter(private val chronometers: MutableList<Triple<Long, Bool
                 startStopButton.setImageResource(R.drawable.ic_pause) // Set the pause icon
                 startStopButton.contentDescription = holder.view.context.getString(R.string.pause)
             }
-            // Save the state
+            // Updates the state
             chronometers[position] = Triple(elapsedTime, isCounting, editText.text.toString())
-//            println("ElapsedTime $elapsedTime, isCounting $isCounting, editText ${editText.text} position $position")
+        }
+
+        removeButton.setOnClickListener {
+            // Removes the chronometer from the state
+            chronometers.removeAt(position)
+            // Notifies the adapter
+            notifyItemRemoved(position)
+            notifyItemRangeChanged(position, chronometers.size)
+        }
+
+
+    }
+
+    fun saveElapsedTime(recyclerView: RecyclerView) {
+        for ((index, chronometer) in chronometers.withIndex()) {
+            val (_, isCounting, text) = chronometer
+            if (isCounting) {
+                // If the chronometer is counting, update the elapsed time
+                val view = recyclerView.findViewHolderForAdapterPosition(index)?.itemView
+                val chronometerView = view?.findViewById<Chronometer>(R.id.chronometer)
+                val newElapsedTime = SystemClock.elapsedRealtime() - chronometerView?.base!!
+                chronometers[index] = Triple(newElapsedTime, true, text)
+            }
         }
     }
+
+
 }

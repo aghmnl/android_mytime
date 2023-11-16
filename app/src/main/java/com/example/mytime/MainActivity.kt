@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Initialize the chronometer, buttons and progressbar
+        // Initializes the chronometer, buttons and progressbar
         chronometer = findViewById(R.id.chronometer)
         startPauseButton = findViewById(R.id.startPauseButton)
         resetButton = findViewById(R.id.resetButton)
@@ -38,13 +38,13 @@ class MainActivity : AppCompatActivity() {
         recyclerView = findViewById(R.id.recyclerView)
         floatingActionButton = findViewById(R.id.floatingActionButton)
 
-        // Initialize the ChronometerState and the mainChronometer objects
+        // Initializes the ChronometerState and the mainChronometer objects
         mainChronometer = MainChronometer(this, chronometer, startPauseButton, resetButton, progressBar)
         chronometerState = ChronometerState(this)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = ChronometerAdapter(chronometers)
 
-        // Setting the listeners
+        // Sets the listeners
         mainChronometer.setStartPauseButtonClickListener()
         mainChronometer.setResetButtonClickListener()
         mainChronometer.setChronometerTickListener()
@@ -53,15 +53,15 @@ class MainActivity : AppCompatActivity() {
             recyclerView.adapter?.notifyItemInserted(chronometers.size - 1)
         }
 
-        // Restore the state from SharedPreferences
+        // Restores the state from SharedPreferences
         chronometers.addAll(chronometerState.restoreState())
     }
 
     override fun onPause() {
         super.onPause()
+        (recyclerView.adapter as ChronometerAdapter).saveElapsedTime(recyclerView)
 
-        // Save the state to SharedPreferences
+        // Saves the state to SharedPreferences
         chronometerState.saveState(chronometers)
-//        println("SAVING THE STATE in onPause")
     }
 }

@@ -11,7 +11,7 @@ class ChronometerState(context: Context) {
         editor.putInt("size", chronometers.size)
         for (i in chronometers.indices) {
             editor.putLong("base_$i", chronometers[i].first)
-            editor.putBoolean("isCounting_$i", chronometers[i].second)
+            editor.putBoolean("isCounting_$i", false)
             editor.putString("text_$i", chronometers[i].third)
         }
         editor.apply()
