@@ -13,7 +13,7 @@ class MainChronometer(
         private val resetButton: ImageButton,
         private val progressBar: ProgressBar
     ) {
-    // Declare and initialize variables for the start state and elapsed time
+    // Declares and initializes variables for the start state and elapsed time
     private var isCounting = false
     private var elapsedTime = 0L
 

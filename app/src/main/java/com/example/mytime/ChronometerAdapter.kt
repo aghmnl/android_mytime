@@ -1,6 +1,10 @@
 package com.example.mytime
 
+import android.os.Handler
+import android.os.Looper
 import android.os.SystemClock
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,6 +36,8 @@ class ChronometerAdapter(private val chronometers: MutableList<Triple<Long, Bool
         var (elapsedTime, isCounting, text) = chronometers[position]
         chronometer.base = SystemClock.elapsedRealtime() - elapsedTime
 
+        val handler = Handler(Looper.getMainLooper())
+
         // Depending on the isCounting state, initializes the chronometers
         editText.setText(text)
 
@@ -55,6 +61,22 @@ class ChronometerAdapter(private val chronometers: MutableList<Triple<Long, Bool
             chronometers[position] = Triple(elapsedTime, isCounting, editText.text.toString())
         }
 
+        editText.addTextChangedListener(object: TextWatcher {
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                // It takes the new text as a parameter and saves it in the state
+                val runnable = Runnable {
+                    chronometers[holder.adapterPosition] = Triple(SystemClock.elapsedRealtime() - chronometer.base, isCounting, s.toString())
+                }
+
+                handler.removeCallbacksAndMessages(null) // Cancel the previous delay
+                handler.postDelayed(runnable, 300) // Start a new delay
+            }
+
+            override fun afterTextChanged(s: Editable) {}
+        })
+
         removeButton.setOnClickListener {
             // Removes the chronometer from the state
             chronometers.removeAt(position)
@@ -62,8 +84,6 @@ class ChronometerAdapter(private val chronometers: MutableList<Triple<Long, Bool
             notifyItemRemoved(position)
             notifyItemRangeChanged(position, chronometers.size)
         }
-
-
     }
 
     fun saveElapsedTime(recyclerView: RecyclerView) {
@@ -78,6 +98,4 @@ class ChronometerAdapter(private val chronometers: MutableList<Triple<Long, Bool
             }
         }
     }
-
-
 }
