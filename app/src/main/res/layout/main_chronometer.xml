@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="10dp">
+
+    <ProgressBar
+        android:id="@+id/progressBarBackground"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:indeterminate="false"
+        android:max="100"
+        android:progressDrawable="@drawable/circular_progress_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:indeterminate="false"
+        android:max="10"
+        android:progressDrawable="@drawable/circular_progress_bar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Chronometer
+        android:id="@+id/chronometer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/text"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toBottomOf="@+id/progressBarBackground"
+        app:layout_constraintEnd_toEndOf="@+id/progressBarBackground"
+        app:layout_constraintStart_toStartOf="@+id/progressBarBackground"
+        app:layout_constraintTop_toTopOf="@+id/progressBarBackground" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/startPauseButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:contentDescription="@string/start"
+        android:focusable="true"
+        app:layout_constraintBottom_toBottomOf="@id/progressBarBackground"
+        app:layout_constraintEnd_toEndOf="@+id/progressBarBackground"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/progressBarBackground"
+        app:layout_constraintTop_toTopOf="@+id/progressBarBackground"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/ic_play"
+        android:layout_marginBottom="10dp"/>
+
+    <ImageButton
+        android:id="@+id/resetButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/stop"
+        android:minWidth="50dp"
+        android:minHeight="50dp"
+        android:src="@drawable/ic_reset"
+        app:layout_constraintBottom_toBottomOf="@+id/progressBarBackground"
+        app:layout_constraintEnd_toEndOf="@+id/progressBarBackground"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/startPauseButton" />
+
+    <ImageButton
+        android:id="@+id/removeMainButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/remove"
+        android:minWidth="50dp"
+        android:minHeight="50dp"
+        android:src="@drawable/ic_close"
+        app:layout_constraintBottom_toBottomOf="@+id/progressBarBackground"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/progressBarBackground"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <EditText
+        android:id="@+id/editMainText"
+        style="@android:style/Widget.DeviceDefault.EditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:autofillHints="name"
+        android:background="@android:color/transparent"
+        android:hint="@string/new_project"
+        android:inputType="text"
+        android:maxWidth="200dp"
+        android:minHeight="50dp"
+        android:text="@string/new_project"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/removeMainButton"
+        app:layout_constraintEnd_toEndOf="@+id/progressBarBackground"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/progressBarBackground"
+        app:layout_constraintVertical_bias=".5" />
+
+    <EditText
+        android:id="@+id/editTarget"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:autofillHints="target"
+        android:background="@android:color/transparent"
+        android:inputType="datetime|time"
+        android:minHeight="50dp"
+        android:minWidth="50dp"
+        android:text="@string/midnight"
+        app:layout_constraintBottom_toTopOf="@+id/chronometer"
+        app:layout_constraintEnd_toEndOf="@+id/progressBarBackground"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/progressBarBackground"
+        app:layout_constraintTop_toTopOf="@+id/progressBarBackground"
+        app:layout_constraintVertical_bias="1.0" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
