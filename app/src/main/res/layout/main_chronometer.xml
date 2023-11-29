@@ -6,7 +6,7 @@
     android:paddingBottom="10dp">
 
     <ProgressBar
-        android:id="@+id/progressBarBackground"
+        android:id="@+id/mainProgressBarBackground"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="250dp"
         android:layout_height="250dp"
@@ -20,7 +20,7 @@
         app:layout_constraintVertical_bias="0" />
 
     <ProgressBar
-        android:id="@+id/progressBar"
+        android:id="@+id/mainProgressBar"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="250dp"
         android:layout_height="250dp"
@@ -34,28 +34,28 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <Chronometer
-        android:id="@+id/chronometer"
+        android:id="@+id/mainChronometer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/text"
         android:textSize="40sp"
-        app:layout_constraintBottom_toBottomOf="@+id/progressBarBackground"
-        app:layout_constraintEnd_toEndOf="@+id/progressBarBackground"
-        app:layout_constraintStart_toStartOf="@+id/progressBarBackground"
-        app:layout_constraintTop_toTopOf="@+id/progressBarBackground" />
+        app:layout_constraintBottom_toBottomOf="@+id/mainProgressBarBackground"
+        app:layout_constraintEnd_toEndOf="@+id/mainProgressBarBackground"
+        app:layout_constraintStart_toStartOf="@+id/mainProgressBarBackground"
+        app:layout_constraintTop_toTopOf="@+id/mainProgressBarBackground" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/startPauseButton"
+        android:id="@+id/mainStartPauseButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
         android:contentDescription="@string/start"
         android:focusable="true"
-        app:layout_constraintBottom_toBottomOf="@id/progressBarBackground"
-        app:layout_constraintEnd_toEndOf="@+id/progressBarBackground"
+        app:layout_constraintBottom_toBottomOf="@id/mainProgressBarBackground"
+        app:layout_constraintEnd_toEndOf="@+id/mainProgressBarBackground"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/progressBarBackground"
-        app:layout_constraintTop_toTopOf="@+id/progressBarBackground"
+        app:layout_constraintStart_toStartOf="@+id/mainProgressBarBackground"
+        app:layout_constraintTop_toTopOf="@+id/mainProgressBarBackground"
         app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/ic_play"
         android:layout_marginBottom="10dp"/>
@@ -69,10 +69,10 @@
         android:minWidth="50dp"
         android:minHeight="50dp"
         android:src="@drawable/ic_reset"
-        app:layout_constraintBottom_toBottomOf="@+id/progressBarBackground"
-        app:layout_constraintEnd_toEndOf="@+id/progressBarBackground"
+        app:layout_constraintBottom_toBottomOf="@+id/mainProgressBarBackground"
+        app:layout_constraintEnd_toEndOf="@+id/mainProgressBarBackground"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/startPauseButton" />
+        app:layout_constraintStart_toEndOf="@+id/mainStartPauseButton" />
 
     <ImageButton
         android:id="@+id/removeMainButton"
@@ -83,9 +83,9 @@
         android:minWidth="50dp"
         android:minHeight="50dp"
         android:src="@drawable/ic_close"
-        app:layout_constraintBottom_toBottomOf="@+id/progressBarBackground"
+        app:layout_constraintBottom_toBottomOf="@+id/mainProgressBarBackground"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/progressBarBackground"
+        app:layout_constraintTop_toTopOf="@+id/mainProgressBarBackground"
         app:layout_constraintVertical_bias="0.0" />
 
     <EditText
@@ -103,14 +103,14 @@
         android:paddingStart="10dp"
         android:paddingEnd="10dp"
         app:layout_constraintBottom_toBottomOf="@+id/removeMainButton"
-        app:layout_constraintEnd_toEndOf="@+id/progressBarBackground"
+        app:layout_constraintEnd_toEndOf="@+id/mainProgressBarBackground"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/progressBarBackground"
+        app:layout_constraintTop_toTopOf="@+id/mainProgressBarBackground"
         app:layout_constraintVertical_bias=".5" />
 
     <EditText
-        android:id="@+id/editTarget"
+        android:id="@+id/editMainTarget"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:autofillHints="target"
@@ -119,11 +119,11 @@
         android:minHeight="50dp"
         android:minWidth="50dp"
         android:text="@string/midnight"
-        app:layout_constraintBottom_toTopOf="@+id/chronometer"
-        app:layout_constraintEnd_toEndOf="@+id/progressBarBackground"
+        app:layout_constraintBottom_toTopOf="@+id/mainChronometer"
+        app:layout_constraintEnd_toEndOf="@+id/mainProgressBarBackground"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/progressBarBackground"
-        app:layout_constraintTop_toTopOf="@+id/progressBarBackground"
+        app:layout_constraintStart_toStartOf="@+id/mainProgressBarBackground"
+        app:layout_constraintTop_toTopOf="@+id/mainProgressBarBackground"
         app:layout_constraintVertical_bias="1.0" />
 
 

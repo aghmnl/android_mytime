@@ -3,9 +3,10 @@ package com.example.mytime
 import android.content.Context
 import android.os.SystemClock
 
-class ChronometerState(context: Context) {
+class ChronometersStoredState(context: Context) {
     private val sharedPreferences = context.getSharedPreferences("MainActivity", Context.MODE_PRIVATE)
 
+    // Saves the state in the sharedPreferences receiving a list of all the chronometers as parameter
     fun saveState(chronometers: List<Triple<Long, Boolean, String>>) {
         val editor = sharedPreferences.edit()
         editor.putInt("size", chronometers.size)
