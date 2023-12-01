@@ -1,7 +1,7 @@
 package com.example.mytime
 
 import android.os.Bundle
-import android.widget.Chronometer
+import android.widget.Chronometer as ChronometerWidget
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ProgressBar
@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.mytime.dataClasses.MainChronometerStrings
 import com.example.mytime.dataClasses.MainChronometerViews
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.example.mytime.dataClasses.Chronometer
 
 class MainActivity : AppCompatActivity() {
 
@@ -20,7 +21,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var secondaryChronometers: SecondaryChronometers
     private lateinit var mainChronometerViews: MainChronometerViews
     // Declare variables for the chronometer, buttons and progressbar
-    private lateinit var chronometerView: Chronometer
+    private lateinit var chronometerView: ChronometerWidget
     private lateinit var editMainText: EditText
     private lateinit var mainProgressBar: ProgressBar
     private lateinit var mainStartPauseButton: ImageButton
@@ -29,7 +30,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var floatingActionButton: FloatingActionButton
 
     // Creates the list of chronometers
-    private val allChronometers = mutableListOf<Triple<Long, Boolean, String>>()
+    private val allChronometers = mutableListOf<Chronometer>()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -68,13 +69,13 @@ class MainActivity : AppCompatActivity() {
 
         floatingActionButton.setOnClickListener {
             // Adds a new chronometer to the list
-            secondaryChronometers.addChronometer(Triple(0, false, ""))
+            secondaryChronometers.addChronometer(Chronometer(0, false, ""))
         }
     }
 
     override fun onPause() {
         super.onPause()
-        (recyclerView.adapter as ChronometerAdapter).saveElapsedTime(recyclerView)
+
 
         // Saves the state to SharedPreferences
         chronometersStoredState.saveState(allChronometers)

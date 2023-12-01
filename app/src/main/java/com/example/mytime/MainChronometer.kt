@@ -16,7 +16,7 @@ class MainChronometer(
     private val start = mainChronometerStrings.start
     private val pause = mainChronometerStrings.pause
     private val chronometerView = mainChronometerViews.chronometerView
-    private val editMainText = mainChronometerViews.editMainText
+//    private val editMainText = mainChronometerViews.editMainText
     private val mainProgressBar = mainChronometerViews.mainProgressBar
     private val mainStartPauseButton = mainChronometerViews.mainStartPauseButton
 
@@ -72,11 +72,15 @@ class MainChronometer(
         }
     }
 
-    fun setMainChronometer(elapsedTime: Long, text: String) {
-        // Sets the main chronometer with the provided elapsed time and text
-        this.elapsedTime = elapsedTime
-        chronometerView.base = SystemClock.elapsedRealtime() - elapsedTime
-        startMainChronometer()
-        editMainText.setText(text)
-    }
+//    fun getElapsedTime(): Long {
+//        return SystemClock.elapsedRealtime() - chronometerView.base
+//    }
+
+//    fun setMainChronometer(elapsedTime: Long, text: String) {
+//        // Sets the main chronometer with the provided elapsed time and text
+//        this.elapsedTime = elapsedTime
+//        chronometerView.base = SystemClock.elapsedRealtime() - elapsedTime
+//        startMainChronometer()
+//        editMainText.setText(text)
+//    }
 }

@@ -2,10 +2,11 @@ package com.example.mytime
 
 import android.os.SystemClock
 import androidx.recyclerview.widget.RecyclerView
+import com.example.mytime.dataClasses.Chronometer
 import com.example.mytime.dataClasses.MainChronometerViews
 
 class SecondaryChronometers(
-    private val allChronometers: MutableList<Triple<Long, Boolean, String>>,
+    private val allChronometers: MutableList<Chronometer>,
     private var recyclerView: RecyclerView,
     mainChronometerViews: MainChronometerViews,
     private val mainChronometer: MainChronometer
@@ -22,11 +23,11 @@ class SecondaryChronometers(
         return stoppedChronometers.size
     }
 
-    fun getIterable(): Iterable<IndexedValue<Triple<Long, Boolean, String>>>{
-        return stoppedChronometers.withIndex()
-    }
+//    fun getIterable(): Iterable<IndexedValue<Chronometer>>{
+//        return stoppedChronometers.withIndex()
+//    }
 
-    fun addChronometer(chronometer: Triple<Long, Boolean, String>) {
+    fun addChronometer(chronometer: Chronometer) {
         stoppedChronometers.add(chronometer)
 
         // Notifies the adapter
@@ -51,11 +52,11 @@ class SecondaryChronometers(
         chronometersStoredState.saveState(allChronometers)
     }
 
-    fun get(position: Int): Triple<Long, Boolean, String> {
+    fun get(position: Int): Chronometer {
         return stoppedChronometers[position]
     }
 
-    fun update(chronometer: Triple<Long, Boolean, String>, position: Int) {
+    fun update(chronometer: Chronometer, position: Int) {
         stoppedChronometers[position] = chronometer
         allChronometers[position+1] = chronometer
         chronometersStoredState.saveState(allChronometers)
@@ -64,7 +65,7 @@ class SecondaryChronometers(
     fun playAndConvertToMain(position: Int) {
         val newMainChronometer = stoppedChronometers.removeAt(position)
         val (elapsedTime, _, text) =  newMainChronometer
-        val oldMainChronometer: Triple<Long, Boolean, String> = Triple(SystemClock.elapsedRealtime() - chronometerView.base, false, editMainText.text.toString())
+        val oldMainChronometer = Chronometer(SystemClock.elapsedRealtime() - chronometerView.base, false, editMainText.text.toString())
 
         // Updates the main chronometer
         editMainText.setText(text)
