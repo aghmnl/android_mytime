@@ -1,19 +1,17 @@
 package com.example.mytime
 
-import android.os.SystemClock
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mytime.dataClasses.Chronometer
-import com.example.mytime.dataClasses.MainChronometerViews
 
 class SecondaryChronometers(
     private val allChronometers: MutableList<Chronometer>,
     private var recyclerView: RecyclerView,
-    mainChronometerViews: MainChronometerViews,
+//    mainChronometerViews: MainChronometerViews,
     private val mainChronometer: MainChronometer
 ) {
     private val chronometersStoredState = ChronometersStoredState(recyclerView.context)
-    private val chronometerView = mainChronometerViews.chronometerView
-    private val editMainText = mainChronometerViews.editMainText
+//    private val chronometerView = mainChronometerViews.chronometerView
+//    private val editMainText = mainChronometerViews.editMainText
 //    private val mainProgressBar = mainChronometerViews.mainProgressBar
 //    private val mainStartPauseButton = mainChronometerViews.mainStartPauseButton
 
@@ -62,15 +60,19 @@ class SecondaryChronometers(
         chronometersStoredState.saveState(allChronometers)
     }
 
-    fun playAndConvertToMain(position: Int) {
+    fun startAndConvertToMain(position: Int) {
+        // This stops the main chronometer when converting the secondary chronometer into a main one
+        if(allChronometers[0].isCounting) mainChronometer.stop()
+
         val newMainChronometer = stoppedChronometers.removeAt(position)
-        val (elapsedTime, _, text) =  newMainChronometer
-        val oldMainChronometer = Chronometer(SystemClock.elapsedRealtime() - chronometerView.base, false, editMainText.text.toString())
+//        val (elapsedTime, _, text) =  newMainChronometer
+
+        val oldMainChronometer = allChronometers[0]
 
         // Updates the main chronometer
-        editMainText.setText(text)
-        chronometerView.base = SystemClock.elapsedRealtime() - elapsedTime
-        mainChronometer.startMainChronometer()
+//        editMainText.setText(text)
+//        chronometerView.base = SystemClock.elapsedRealtime() - elapsedTime
+
 
         // Notifies the adapter
         recyclerView.adapter?.notifyItemRemoved(position)
@@ -82,12 +84,17 @@ class SecondaryChronometers(
         recyclerView.adapter?.notifyItemRangeChanged(0, getSize())
         recyclerView.scrollToPosition(0)
 
+
 //        startStopButton.setImageResource(R.drawable.ic_pause) // Set the pause icon
 //        startStopButton.contentDescription = holder.view.context.getString(R.string.pause)
 
         // Updates the sate
         allChronometers.removeAt(position+1)
         allChronometers.add(0, newMainChronometer)
+
+        mainChronometer.initialize()
+        mainChronometer.start()
+
         chronometersStoredState.saveState(allChronometers)
     }
 }

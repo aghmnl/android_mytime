@@ -4,7 +4,7 @@ import android.content.Context
 import android.os.SystemClock
 import com.example.mytime.dataClasses.Chronometer
 
-class ChronometersStoredState(context: Context) {
+class ChronometersStoredState(private val context: Context) {
     private val sharedPreferences = context.getSharedPreferences("MainActivity", Context.MODE_PRIVATE)
 
     // Saves the state in the sharedPreferences receiving a list of all the chronometers as parameter
@@ -12,7 +12,7 @@ class ChronometersStoredState(context: Context) {
         val editor = sharedPreferences.edit()
         editor.putInt("size", chronometers.size)
         for (i in chronometers.indices) {
-            editor.putLong("base_$i", chronometers[i].time)
+            editor.putLong("base_$i", chronometers[i].elapsedTime)
             editor.putBoolean("isCounting_$i", false)
             editor.putString("text_$i", chronometers[i].label)
         }
@@ -20,14 +20,21 @@ class ChronometersStoredState(context: Context) {
     }
 
     fun restoreState(): MutableList<Chronometer> {
+//        println("ENTERING RESTORE STATE")
         val chronometers = mutableListOf<Chronometer>()
         val size = sharedPreferences.getInt("size", 0)
-        for (i in 0 until size) {
-            val base = sharedPreferences.getLong("base_$i", SystemClock.elapsedRealtime())
-            val isCounting = sharedPreferences.getBoolean("isCounting_$i", false)
-            val text = sharedPreferences.getString("text_$i", "")
-            chronometers.add(Chronometer(base, isCounting, text ?: ""))
+//        println("SIZE $size")
+        if (size > 0) {
+            for (i in 0 until size) {
+                val base = sharedPreferences.getLong("base_$i", SystemClock.elapsedRealtime())
+                val isCounting = sharedPreferences.getBoolean("isCounting_$i", false)
+                val text = sharedPreferences.getString("text_$i", "")
+                chronometers.add(Chronometer(base, isCounting, text ?: ""))
+            }
+        } else {
+            chronometers.add(Chronometer(0, false, context.getString(R.string.new_project)))
         }
+//        println("SIZE ${chronometers.size}")
         return chronometers
     }
 }

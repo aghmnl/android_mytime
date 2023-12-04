@@ -1,3 +1,12 @@
 package com.example.mytime.dataClasses
 
-data class Chronometer(val time: Long, val isActive: Boolean, val label: String)
+data class Chronometer(var elapsedTime: Long, var isCounting: Boolean, val label: String) {
+    fun setTime(newElapsedTime: Long) {
+        elapsedTime = newElapsedTime
+    }
+
+    fun setIsCounting(newIsCounting: Boolean) {
+        isCounting = newIsCounting
+    }
+
+}

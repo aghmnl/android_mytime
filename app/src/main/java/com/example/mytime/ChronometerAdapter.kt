@@ -40,12 +40,12 @@ class ChronometerAdapter(
 
         val handler = Handler(Looper.getMainLooper())
 
-        // TODO: the initialization should take into account the main chronometer state
         editText.setText(text)
+
 
         startStopButton.setOnClickListener {
             // TODO: the secondary chronometers cannot be counting, only the main chronometer can
-            stoppedChronometers.playAndConvertToMain(position)
+            stoppedChronometers.startAndConvertToMain(position)
         }
 
         editText.addTextChangedListener(object: TextWatcher {

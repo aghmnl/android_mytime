@@ -19,7 +19,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var chronometersStoredState: ChronometersStoredState
     private lateinit var mainChronometer: MainChronometer
     private lateinit var secondaryChronometers: SecondaryChronometers
-    private lateinit var mainChronometerViews: MainChronometerViews
     // Declare variables for the chronometer, buttons and progressbar
     private lateinit var chronometerView: ChronometerWidget
     private lateinit var editMainText: EditText
@@ -47,17 +46,18 @@ class MainActivity : AppCompatActivity() {
         resetButton = findViewById(R.id.resetButton)
         mainProgressBar = findViewById(R.id.mainProgressBar)
         editMainText = findViewById(R.id.editMainText)
+        floatingActionButton = findViewById(R.id.floatingActionButton)
 
-        mainChronometerViews = MainChronometerViews(chronometerView, editMainText, mainProgressBar, mainStartPauseButton)
-
+        val mainChronometerViews = MainChronometerViews(chronometerView, editMainText, mainProgressBar, mainStartPauseButton)
         val mainChronometerStrings = MainChronometerStrings(getString(R.string.start), getString(R.string.pause))
 
         recyclerView = findViewById(R.id.recyclerView)
-        floatingActionButton = findViewById(R.id.floatingActionButton)
 
-        // Initializes the ChronometerState and the mainChronometer objects
-        mainChronometer = MainChronometer(mainChronometerStrings, resetButton, mainChronometerViews )
-        secondaryChronometers = SecondaryChronometers(allChronometers, recyclerView, mainChronometerViews, mainChronometer)
+        // Initializes the main and secondary chronometers
+        mainChronometer = MainChronometer(allChronometers, mainChronometerStrings, resetButton, mainChronometerViews )
+        mainChronometer.initialize()
+        secondaryChronometers = SecondaryChronometers(allChronometers, recyclerView, mainChronometer)
+
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = ChronometerAdapter(secondaryChronometers)
 
@@ -65,7 +65,6 @@ class MainActivity : AppCompatActivity() {
         mainChronometer.setStartPauseButtonClickListener()
         mainChronometer.setResetButtonClickListener()
         mainChronometer.setChronometerTickListener()
-
 
         floatingActionButton.setOnClickListener {
             // Adds a new chronometer to the list
@@ -75,8 +74,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onPause() {
         super.onPause()
-
-
         // Saves the state to SharedPreferences
         chronometersStoredState.saveState(allChronometers)
     }

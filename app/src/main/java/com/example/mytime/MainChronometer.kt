@@ -2,59 +2,69 @@ package com.example.mytime
 
 import android.os.SystemClock
 import android.widget.ImageButton
+import com.example.mytime.dataClasses.Chronometer
 import com.example.mytime.dataClasses.MainChronometerStrings
 import com.example.mytime.dataClasses.MainChronometerViews
 
 class MainChronometer(
+    private val allChronometers: MutableList<Chronometer>,
     mainChronometerStrings: MainChronometerStrings,
     private val resetButton: ImageButton,
     mainChronometerViews: MainChronometerViews,
     ) {
     // Declares and initializes variables for the start state and elapsed time
-    private var isCounting = false
-    private var elapsedTime = 0L
+//    private var isCounting = false
+//    private var elapsedTime = 0L
     private val start = mainChronometerStrings.start
     private val pause = mainChronometerStrings.pause
     private val chronometerView = mainChronometerViews.chronometerView
-//    private val editMainText = mainChronometerViews.editMainText
+    private val editMainText = mainChronometerViews.editMainText
     private val mainProgressBar = mainChronometerViews.mainProgressBar
     private val mainStartPauseButton = mainChronometerViews.mainStartPauseButton
 
-    // Stops the main chronometer
-    private fun stopMainChronometer() {
+    fun initialize() {
+        editMainText.setText(allChronometers[0].label)
+        chronometerView.base = SystemClock.elapsedRealtime() - allChronometers[0].elapsedTime
+    }
+
+    fun stop() {
         chronometerView.stop()
-        isCounting = false
+        println("VER RESULTADO DE ESTA CUENTA: ${SystemClock.elapsedRealtime() - chronometerView.base}")
+        println("elapsed time es ${allChronometers[0].elapsedTime}")
+        allChronometers[0].setTime(SystemClock.elapsedRealtime() - chronometerView.base)
+        allChronometers[0].setIsCounting(false)
         mainStartPauseButton.setImageResource(R.drawable.ic_play)
         mainStartPauseButton.contentDescription = start
     }
 
     // Starts the main chronometer
-    fun startMainChronometer() {
+    fun start() {
+
+        chronometerView.base = SystemClock.elapsedRealtime() - allChronometers[0].elapsedTime
         chronometerView.start()
-        isCounting = true
+        allChronometers[0].setIsCounting(true)
         mainStartPauseButton.setImageResource(R.drawable.ic_pause)
         mainStartPauseButton.contentDescription = pause
     }
 
     fun setStartPauseButtonClickListener() {
         mainStartPauseButton.setOnClickListener {
-            if (isCounting) {
-                // Stops and saves the elapsed time
-                elapsedTime = SystemClock.elapsedRealtime() - chronometerView.base
-                stopMainChronometer()
+            if (allChronometers[0].isCounting) {
+                stop()
             } else {
-                // Starts from the elapsed time
-                chronometerView.base = SystemClock.elapsedRealtime() - elapsedTime
-                startMainChronometer()
+                start()
             }
         }
     }
 
     fun setResetButtonClickListener() {
         resetButton.setOnClickListener {
+            chronometerView.stop()
             chronometerView.base = SystemClock.elapsedRealtime()  // Returns to 0 the time shown
-            elapsedTime = 0L  // Resets the counter
-            stopMainChronometer()
+            allChronometers[0].setTime(0)
+            allChronometers[0].setIsCounting(false)
+            mainStartPauseButton.setImageResource(R.drawable.ic_play)
+            mainStartPauseButton.contentDescription = start
         }
     }
 
