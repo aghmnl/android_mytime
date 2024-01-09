@@ -7,6 +7,9 @@
         <item name="colorOnPrimary">@color/color1_700</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/color1_300</item>
+        <item name="colorAccent">@color/color1_500</item>
+        <item name="android:textColor">@color/color1_950</item>
+        <item name="android:textColorHint">@color/color1_900</item>
         <item name="colorSecondaryVariant">@color/color1_500</item>
         <item name="colorOnSecondary">@color/color1_950</item>
         <!-- Status bar color. -->

@@ -38,7 +38,7 @@
         android:id="@+id/mainChronometer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/ChronometerStyle"
+        android:fontFamily="@font/red_hat_display"
         android:textColor="@color/text"
         android:textSize="40sp"
         app:layout_constraintBottom_toBottomOf="@+id/mainProgressBarBackground"
@@ -52,6 +52,8 @@
         android:id="@+id/mainStartPauseButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="@color/color1_500"
         android:clickable="true"
         android:contentDescription="@string/start"
         android:focusable="true"
@@ -61,8 +63,8 @@
         app:layout_constraintStart_toStartOf="@+id/mainProgressBarBackground"
         app:layout_constraintTop_toTopOf="@+id/mainProgressBarBackground"
         app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/ic_play"
-        android:layout_marginBottom="10dp"/>
+        app:rippleColor="@color/color1_950"
+        app:srcCompat="@drawable/ic_play" />
 
     <ImageButton
         android:id="@+id/resetButton"
