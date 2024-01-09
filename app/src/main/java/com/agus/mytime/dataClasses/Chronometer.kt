@@ -1,4 +1,4 @@
-package com.example.mytime.dataClasses
+package com.agus.mytime.dataClasses
 
 data class Chronometer(var elapsedTime: Long, var isCounting: Boolean, val label: String) {
     fun setTime(newElapsedTime: Long) {

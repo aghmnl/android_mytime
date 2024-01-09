@@ -1,4 +1,4 @@
-package com.example.mytime
+package com.agus.mytime
 
 import org.junit.Test
 

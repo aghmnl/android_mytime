@@ -1,4 +1,4 @@
-package com.example.mytime.dataClasses
+package com.agus.mytime.dataClasses
 
 import android.widget.Chronometer
 import android.widget.EditText

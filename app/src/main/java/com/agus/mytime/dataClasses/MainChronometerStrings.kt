@@ -1,4 +1,4 @@
-package com.example.mytime.dataClasses
+package com.agus.mytime.dataClasses
 
 data class MainChronometerStrings(
     val start: String,

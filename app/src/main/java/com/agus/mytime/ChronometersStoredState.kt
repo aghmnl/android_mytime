@@ -1,8 +1,9 @@
-package com.example.mytime
+package com.agus.mytime
 
 import android.content.Context
 import android.os.SystemClock
-import com.example.mytime.dataClasses.Chronometer
+import com.agus.mytime.dataClasses.Chronometer
+import com.example.mytime.R
 
 class ChronometersStoredState(private val context: Context) {
     private val sharedPreferences = context.getSharedPreferences("MainActivity", Context.MODE_PRIVATE)

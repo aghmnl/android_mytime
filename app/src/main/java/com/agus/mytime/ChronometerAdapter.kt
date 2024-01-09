@@ -1,4 +1,4 @@
-package com.example.mytime
+package com.agus.mytime
 
 import android.os.Handler
 import android.os.Looper
@@ -12,7 +12,8 @@ import android.widget.Chronometer as ChronometerWidget
 import android.widget.EditText
 import android.widget.ImageButton
 import androidx.recyclerview.widget.RecyclerView
-import com.example.mytime.dataClasses.Chronometer
+import com.agus.mytime.dataClasses.Chronometer
+import com.example.mytime.R
 
 class ChronometerAdapter(
         private val stoppedChronometers: SecondaryChronometers

@@ -1,10 +1,12 @@
-package com.example.mytime
+package com.agus.mytime
 
 import android.os.SystemClock
 import android.widget.ImageButton
-import com.example.mytime.dataClasses.Chronometer
-import com.example.mytime.dataClasses.MainChronometerStrings
-import com.example.mytime.dataClasses.MainChronometerViews
+import com.agus.mytime.dataClasses.Chronometer
+import com.agus.mytime.dataClasses.MainChronometerStrings
+import com.agus.mytime.dataClasses.MainChronometerViews
+import com.example.mytime.R
+
 
 class MainChronometer(
     private val allChronometers: MutableList<Chronometer>,

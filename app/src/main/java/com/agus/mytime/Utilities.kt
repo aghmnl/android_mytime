@@ -1,7 +1,8 @@
-package com.example.mytime
+package com.agus.mytime
 
 import android.content.Context
 import android.widget.Toast
+import com.example.mytime.R
 
 class Utilities(private val context: Context) {
     private fun targetAchieved() {

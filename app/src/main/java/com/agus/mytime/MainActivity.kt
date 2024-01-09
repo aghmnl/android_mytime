@@ -1,4 +1,4 @@
-package com.example.mytime
+package com.agus.mytime
 
 import android.os.Bundle
 import android.widget.Chronometer as ChronometerWidget
@@ -8,10 +8,12 @@ import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.mytime.dataClasses.MainChronometerStrings
-import com.example.mytime.dataClasses.MainChronometerViews
+import com.agus.mytime.dataClasses.MainChronometerStrings
+import com.agus.mytime.dataClasses.MainChronometerViews
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.example.mytime.dataClasses.Chronometer
+import com.agus.mytime.dataClasses.Chronometer
+import com.example.mytime.R
+
 
 class MainActivity : AppCompatActivity() {
 
