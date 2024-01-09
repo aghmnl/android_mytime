@@ -6,7 +6,6 @@ import com.agus.mytime.dataClasses.Chronometer
 class SecondaryChronometers(
     private val allChronometers: MutableList<Chronometer>,
     private var recyclerView: RecyclerView,
-//    mainChronometerViews: MainChronometerViews,
     private val mainChronometer: MainChronometer
 ) {
     private val chronometersStoredState = ChronometersStoredState(recyclerView.context)
@@ -20,10 +19,6 @@ class SecondaryChronometers(
     fun getSize(): Int {
         return stoppedChronometers.size
     }
-
-//    fun getIterable(): Iterable<IndexedValue<Chronometer>>{
-//        return stoppedChronometers.withIndex()
-//    }
 
     fun addChronometer(chronometer: Chronometer) {
         stoppedChronometers.add(chronometer)
@@ -65,14 +60,7 @@ class SecondaryChronometers(
         if(allChronometers[0].isCounting) mainChronometer.stop()
 
         val newMainChronometer = stoppedChronometers.removeAt(position)
-//        val (elapsedTime, _, text) =  newMainChronometer
-
         val oldMainChronometer = allChronometers[0]
-
-        // Updates the main chronometer
-//        editMainText.setText(text)
-//        chronometerView.base = SystemClock.elapsedRealtime() - elapsedTime
-
 
         // Notifies the adapter
         recyclerView.adapter?.notifyItemRemoved(position)
@@ -83,10 +71,6 @@ class SecondaryChronometers(
         recyclerView.adapter?.notifyItemInserted(0)
         recyclerView.adapter?.notifyItemRangeChanged(0, getSize())
         recyclerView.scrollToPosition(0)
-
-
-//        startStopButton.setImageResource(R.drawable.ic_pause) // Set the pause icon
-//        startStopButton.contentDescription = holder.view.context.getString(R.string.pause)
 
         // Updates the sate
         allChronometers.removeAt(position+1)

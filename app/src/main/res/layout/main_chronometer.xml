@@ -31,18 +31,22 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone"
         app:layout_constraintVertical_bias="0.0" />
 
     <Chronometer
         android:id="@+id/mainChronometer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        style="@style/ChronometerStyle"
         android:textColor="@color/text"
         android:textSize="40sp"
         app:layout_constraintBottom_toBottomOf="@+id/mainProgressBarBackground"
         app:layout_constraintEnd_toEndOf="@+id/mainProgressBarBackground"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="@+id/mainProgressBarBackground"
-        app:layout_constraintTop_toTopOf="@+id/mainProgressBarBackground" />
+        app:layout_constraintTop_toTopOf="@+id/mainProgressBarBackground"
+        app:layout_constraintVertical_bias="0.497" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/mainStartPauseButton"
@@ -71,8 +75,35 @@
         android:src="@drawable/ic_reset"
         app:layout_constraintBottom_toBottomOf="@+id/mainProgressBarBackground"
         app:layout_constraintEnd_toEndOf="@+id/mainProgressBarBackground"
+        app:layout_constraintHorizontal_bias="0.9"
+        app:layout_constraintStart_toEndOf="@+id/mainStartPauseButton"
+        app:layout_constraintTop_toBottomOf="@+id/mainProgressBar"
+        app:layout_constraintVertical_bias="0.9" />
+
+
+
+    <EditText
+        android:id="@+id/editMainText"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:autofillHints="name"
+        android:background="@android:color/transparent"
+        android:hint="@string/new_project"
+        android:inputType="text"
+        android:maxWidth="200dp"
+        android:minHeight="50dp"
+        android:paddingStart="30dp"
+        android:paddingEnd="70dp"
+        android:text="@string/new_project"
+        android:textColor="@color/text"
+        android:textColorHint="@color/hint"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/removeMainButton"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/mainStartPauseButton" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/mainProgressBarBackground"
+        app:layout_constraintVertical_bias=".5" />
 
     <ImageButton
         android:id="@+id/removeMainButton"
@@ -89,36 +120,16 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <EditText
-        android:id="@+id/editMainText"
-        style="@android:style/Widget.DeviceDefault.EditText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:autofillHints="name"
-        android:background="@android:color/transparent"
-        android:hint="@string/new_project"
-        android:inputType="text"
-        android:maxWidth="200dp"
-        android:minHeight="50dp"
-        android:text="@string/new_project"
-        android:paddingStart="10dp"
-        android:paddingEnd="10dp"
-        app:layout_constraintBottom_toBottomOf="@+id/removeMainButton"
-        app:layout_constraintEnd_toEndOf="@+id/mainProgressBarBackground"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/mainProgressBarBackground"
-        app:layout_constraintVertical_bias=".5" />
-
-    <EditText
         android:id="@+id/editMainTarget"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:autofillHints="target"
         android:background="@android:color/transparent"
         android:inputType="datetime|time"
-        android:minHeight="50dp"
         android:minWidth="50dp"
+        android:minHeight="50dp"
         android:text="@string/midnight"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/mainChronometer"
         app:layout_constraintEnd_toEndOf="@+id/mainProgressBarBackground"
         app:layout_constraintHorizontal_bias="0.5"

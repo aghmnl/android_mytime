@@ -26,6 +26,7 @@
         android:id="@+id/mainChronometer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        style="@style/ChronometerStyle"
         android:minWidth="50dp"
         android:textAlignment="textEnd"
         android:textSize="16sp"
@@ -36,7 +37,6 @@
 
     <EditText
         android:id="@+id/editText"
-        style="@android:style/Widget.DeviceDefault.EditText"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_marginStart="10dp"
@@ -48,7 +48,7 @@
         android:minHeight="50dp"
         android:text="@string/new_project"
         android:textColor="@color/text"
-        android:textColorHint="@color/color1_700"
+        android:textColorHint="@color/hint"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/removeButton"
         app:layout_constraintHorizontal_bias="0.0"

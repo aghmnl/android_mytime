@@ -21,10 +21,8 @@ class ChronometersStoredState(private val context: Context) {
     }
 
     fun restoreState(): MutableList<Chronometer> {
-//        println("ENTERING RESTORE STATE")
         val chronometers = mutableListOf<Chronometer>()
         val size = sharedPreferences.getInt("size", 0)
-//        println("SIZE $size")
         if (size > 0) {
             for (i in 0 until size) {
                 val base = sharedPreferences.getLong("base_$i", SystemClock.elapsedRealtime())
@@ -35,7 +33,6 @@ class ChronometersStoredState(private val context: Context) {
         } else {
             chronometers.add(Chronometer(0, false, context.getString(R.string.new_project)))
         }
-//        println("SIZE ${chronometers.size}")
         return chronometers
     }
 }

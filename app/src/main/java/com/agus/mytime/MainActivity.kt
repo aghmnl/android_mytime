@@ -14,7 +14,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.agus.mytime.dataClasses.Chronometer
 import com.example.mytime.R
 
-
 class MainActivity : AppCompatActivity() {
 
     // Code moved to other classes for better understanding
@@ -27,6 +26,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var mainProgressBar: ProgressBar
     private lateinit var mainStartPauseButton: ImageButton
     private lateinit var resetButton: ImageButton
+    private lateinit var removeButton: ImageButton
     private lateinit var recyclerView: RecyclerView
     private lateinit var floatingActionButton: FloatingActionButton
 
@@ -38,6 +38,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // To remove the ActionBar
+        supportActionBar?.hide()
+
         // Restores the state from SharedPreferences
         chronometersStoredState = ChronometersStoredState(this)
         allChronometers.addAll(chronometersStoredState.restoreState())
@@ -46,17 +49,18 @@ class MainActivity : AppCompatActivity() {
         chronometerView = findViewById(R.id.mainChronometer)
         mainStartPauseButton = findViewById(R.id.mainStartPauseButton)
         resetButton = findViewById(R.id.resetButton)
+        removeButton = findViewById(R.id.removeMainButton)
         mainProgressBar = findViewById(R.id.mainProgressBar)
         editMainText = findViewById(R.id.editMainText)
         floatingActionButton = findViewById(R.id.floatingActionButton)
 
-        val mainChronometerViews = MainChronometerViews(chronometerView, editMainText, mainProgressBar, mainStartPauseButton)
+        val mainChronometerViews = MainChronometerViews(chronometerView, editMainText, mainProgressBar, mainStartPauseButton, resetButton, removeButton)
         val mainChronometerStrings = MainChronometerStrings(getString(R.string.start), getString(R.string.pause))
 
         recyclerView = findViewById(R.id.recyclerView)
 
         // Initializes the main and secondary chronometers
-        mainChronometer = MainChronometer(allChronometers, mainChronometerStrings, resetButton, mainChronometerViews )
+        mainChronometer = MainChronometer(allChronometers, mainChronometerStrings, mainChronometerViews)
         mainChronometer.initialize()
         secondaryChronometers = SecondaryChronometers(allChronometers, recyclerView, mainChronometer)
 
@@ -67,6 +71,7 @@ class MainActivity : AppCompatActivity() {
         mainChronometer.setStartPauseButtonClickListener()
         mainChronometer.setResetButtonClickListener()
         mainChronometer.setChronometerTickListener()
+        mainChronometer.setRemoveButtonClickListener()
 
         floatingActionButton.setOnClickListener {
             // Adds a new chronometer to the list

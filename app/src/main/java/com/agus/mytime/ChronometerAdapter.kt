@@ -69,17 +69,4 @@ class ChronometerAdapter(
             stoppedChronometers.remove(position)
         }
     }
-
-//    fun saveElapsedTime(recyclerView: RecyclerView) {
-//        for ((index, chronometer) in stoppedChronometers.getIterable()) {
-//            val (_, isCounting, text) = chronometer
-//            if (isCounting) {
-//                // If the chronometer is counting, update the elapsed time
-//                val view = recyclerView.findViewHolderForAdapterPosition(index)?.itemView
-//                val chronometerView = view?.findViewById<Chronometer>(R.id.mainChronometer)
-//                val newElapsedTime = SystemClock.elapsedRealtime() - chronometerView?.base!!
-//                stoppedChronometers.update(Triple(newElapsedTime, true, text), index)
-//            }
-//        }
-//    }
 }

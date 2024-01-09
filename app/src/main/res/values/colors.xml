@@ -17,4 +17,5 @@ Color1
     <color name="color1_900">#f57f17</color>
     <color name="color1_950">#3E3800</color>
     <color name="text">@color/color1_950</color>
+    <color name="hint">@color/color1_700</color>
 </resources>

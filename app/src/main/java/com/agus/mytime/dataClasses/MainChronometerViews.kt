@@ -9,5 +9,7 @@ data class MainChronometerViews(
     val chronometerView: Chronometer,
     val editMainText: EditText,
     val mainProgressBar: ProgressBar,
-    val mainStartPauseButton: ImageButton
+    val mainStartPauseButton: ImageButton,
+    val resetButton: ImageButton,
+    val removeButton: ImageButton
 )

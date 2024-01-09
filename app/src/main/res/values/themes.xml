@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. DayLight -->
     <style name="Theme.MyTime" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
@@ -11,6 +11,20 @@
         <item name="colorOnSecondary">@color/color1_950</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <item name="editTextStyle">@style/EditTextStyle</item>
+        <item name="android:textViewStyle">@style/TextViewStyle</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="EditTextStyle" parent="android:Widget.EditText">
+        <item name="fontFamily">@font/red_hat_display</item>
+    </style>
+    <style name="TextViewStyle" parent="android:Widget.TextView">
+        <item name="fontFamily">@font/red_hat_display</item>
+    </style>
+    <style name="ChronometerStyle">
+        <item name="fontFamily">@font/red_hat_display</item>
+        <item name="color">@color/text</item>
+    </style>
+
 </resources>
