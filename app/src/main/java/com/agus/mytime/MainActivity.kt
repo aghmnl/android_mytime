@@ -56,7 +56,7 @@ class MainActivity : AppCompatActivity() {
 
         val mainChronometerViews = MainChronometerViews(chronometerView, editMainText, mainProgressBar, mainStartPauseButton, resetButton)
 //        val mainChronometerViews = MainChronometerViews(chronometerView, editMainText, mainProgressBar, mainStartPauseButton, resetButton, removeButton)
-        val mainChronometerStrings = MainChronometerStrings(getString(R.string.start), getString(R.string.pause))
+        val mainChronometerStrings = MainChronometerStrings(getString(R.string.start_stop), getString(R.string.pause))
 
         recyclerView = findViewById(R.id.recyclerView)
 
