@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var mainProgressBar: ProgressBar
     private lateinit var mainStartPauseButton: ImageButton
     private lateinit var resetButton: ImageButton
-    private lateinit var removeButton: ImageButton
+//    private lateinit var removeButton: ImageButton
     private lateinit var recyclerView: RecyclerView
     private lateinit var floatingActionButton: FloatingActionButton
 
@@ -49,12 +49,13 @@ class MainActivity : AppCompatActivity() {
         chronometerView = findViewById(R.id.mainChronometer)
         mainStartPauseButton = findViewById(R.id.mainStartPauseButton)
         resetButton = findViewById(R.id.resetButton)
-        removeButton = findViewById(R.id.removeMainButton)
+//        removeButton = findViewById(R.id.removeMainButton)
         mainProgressBar = findViewById(R.id.mainProgressBar)
         editMainText = findViewById(R.id.editMainText)
         floatingActionButton = findViewById(R.id.floatingActionButton)
 
-        val mainChronometerViews = MainChronometerViews(chronometerView, editMainText, mainProgressBar, mainStartPauseButton, resetButton, removeButton)
+        val mainChronometerViews = MainChronometerViews(chronometerView, editMainText, mainProgressBar, mainStartPauseButton, resetButton)
+//        val mainChronometerViews = MainChronometerViews(chronometerView, editMainText, mainProgressBar, mainStartPauseButton, resetButton, removeButton)
         val mainChronometerStrings = MainChronometerStrings(getString(R.string.start), getString(R.string.pause))
 
         recyclerView = findViewById(R.id.recyclerView)
@@ -71,7 +72,7 @@ class MainActivity : AppCompatActivity() {
         mainChronometer.setStartPauseButtonClickListener()
         mainChronometer.setResetButtonClickListener()
         mainChronometer.setChronometerTickListener()
-        mainChronometer.setRemoveButtonClickListener()
+//        mainChronometer.setRemoveButtonClickListener()
 
         floatingActionButton.setOnClickListener {
             // Adds a new chronometer to the list

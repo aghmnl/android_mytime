@@ -19,7 +19,7 @@ class MainChronometer(
     private val mainProgressBar = mainChronometerViews.mainProgressBar
     private val mainStartPauseButton = mainChronometerViews.mainStartPauseButton
     private val resetButton = mainChronometerViews.resetButton
-    private val removeButton = mainChronometerViews.removeButton
+//    private val removeButton = mainChronometerViews.removeButton
 
     fun initialize() {
         chronometerView.base = SystemClock.elapsedRealtime() - allChronometers[0].elapsedTime
@@ -62,12 +62,11 @@ class MainChronometer(
         else allChronometers.add(Chronometer(0, false, "New Project"))
     }
 
-    fun setRemoveButtonClickListener() {
-        removeButton.setOnClickListener {
-            remove()
-        }
-
-    }
+//    fun setRemoveButtonClickListener() {
+//        removeButton.setOnClickListener {
+//            remove()
+//        }
+//    }
 
 
     fun setResetButtonClickListener() {

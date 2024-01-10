@@ -53,7 +53,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        android:backgroundTint="@color/color1_500"
+        android:backgroundTint="@color/button"
         android:clickable="true"
         android:contentDescription="@string/start"
         android:focusable="true"
@@ -83,43 +83,40 @@
         app:layout_constraintVertical_bias="0.9" />
 
 
-
     <EditText
         android:id="@+id/editMainText"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="50dp"
+        android:layout_marginStart="30dp"
         android:autofillHints="name"
         android:background="@android:color/transparent"
         android:hint="@string/new_project"
         android:inputType="text"
-        android:maxWidth="200dp"
+        android:maxWidth="300dp"
         android:minHeight="50dp"
-        android:paddingStart="30dp"
-        android:paddingEnd="70dp"
         android:text="@string/new_project"
         android:textColor="@color/text"
         android:textColorHint="@color/hint"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/removeMainButton"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/mainProgressBarBackground"
-        app:layout_constraintVertical_bias=".5" />
+        app:layout_constraintTop_toTopOf="@+id/mainProgressBarBackground" />
 
-    <ImageButton
-        android:id="@+id/removeMainButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
-        android:contentDescription="@string/remove"
-        android:minWidth="50dp"
-        android:minHeight="50dp"
-        android:src="@drawable/ic_close"
-        app:layout_constraintBottom_toBottomOf="@+id/mainProgressBarBackground"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/mainProgressBarBackground"
-        app:layout_constraintVertical_bias="0.0" />
+<!--    <ImageButton-->
+<!--        android:id="@+id/removeMainButton"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:background="@android:color/transparent"-->
+<!--        android:contentDescription="@string/remove"-->
+<!--        android:minWidth="50dp"-->
+<!--        android:minHeight="50dp"-->
+<!--        android:src="@drawable/ic_close"-->
+<!--        app:layout_constraintBottom_toBottomOf="@+id/mainProgressBarBackground"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/mainProgressBarBackground"-->
+<!--        app:layout_constraintVertical_bias="0.0" />-->
 
     <EditText
         android:id="@+id/editMainTarget"

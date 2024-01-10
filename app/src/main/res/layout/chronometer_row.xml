@@ -50,6 +50,7 @@
         android:text="@string/new_project"
         android:textColor="@color/text"
         android:textColorHint="@color/hint"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/removeButton"
         app:layout_constraintHorizontal_bias="0.0"

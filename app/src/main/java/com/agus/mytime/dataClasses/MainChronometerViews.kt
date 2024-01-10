@@ -11,5 +11,5 @@ data class MainChronometerViews(
     val mainProgressBar: ProgressBar,
     val mainStartPauseButton: ImageButton,
     val resetButton: ImageButton,
-    val removeButton: ImageButton
+//    val removeButton: ImageButton
 )
