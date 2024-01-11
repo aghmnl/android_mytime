@@ -42,6 +42,10 @@ class ChronometerAdapter(
 
         editText.setText(text)
 
+        // Set a unique content description for each EditText and each button
+        editText.contentDescription = "EditText for row $position"
+        startStopButton.contentDescription = "Start/Stop Button for row $position"
+        removeButton.contentDescription = "Remove Button for row $position"
 
         startStopButton.setOnClickListener {
             // TODO: the secondary chronometers cannot be counting, only the main chronometer can
