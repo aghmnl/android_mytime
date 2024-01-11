@@ -1,15 +1,33 @@
 <resources>
+    <!-- Base application theme. DayLight -->
     <style name="Theme.MyTime" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorPrimary">@color/color1_700</item>
+        <item name="colorPrimaryVariant">@color/color1_900</item>
+        <item name="colorOnPrimary">@color/color1_700</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_700</item>
-        <item name="colorOnSecondary">@color/black</item>
+        <item name="colorSecondary">@color/color1_300</item>
+        <item name="colorAccent">@color/color1_500</item>
+        <item name="android:textColor">@color/color1_950</item>
+        <item name="android:textColorHint">@color/color1_900</item>
+        <item name="colorSecondaryVariant">@color/color1_500</item>
+        <item name="colorOnSecondary">@color/color1_950</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
-
+        <item name="editTextStyle">@style/EditTextStyle</item>
+        <item name="android:textViewStyle">@style/TextViewStyle</item>
+        <!-- Customize your theme here. -->
     </style>
+
+    <style name="EditTextStyle" parent="android:Widget.EditText">
+        <item name="fontFamily">@font/red_hat_display</item>
+    </style>
+    <style name="TextViewStyle" parent="android:Widget.TextView">
+        <item name="fontFamily">@font/red_hat_display</item>
+    </style>
+    <style name="ChronometerStyle">
+        <item name="fontFamily">@font/red_hat_display</item>
+        <item name="color">@color/text</item>
+    </style>
+
 </resources>
