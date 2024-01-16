@@ -40,12 +40,15 @@ class ChronometerAdapter(
 
         val handler = Handler(Looper.getMainLooper())
 
-        editText.setText(text)
-
+        if (text !== "" ) {
+            editText.setText(text)
+        } else {
+            val projectString = holder.view.context.getString(R.string.project_number, position+1)
+            editText.setText(projectString)
+        }
         // Set a unique content description for each EditText and each button
-        editText.contentDescription = "EditText for row $position"
-        startStopButton.contentDescription = "Start/Stop Button for row $position"
-        removeButton.contentDescription = "Remove Button for row $position"
+        startStopButton.contentDescription = "Start/Stop for row $position"
+        removeButton.contentDescription = "Remove for row $position"
 
         startStopButton.setOnClickListener {
             // TODO: the secondary chronometers cannot be counting, only the main chronometer can

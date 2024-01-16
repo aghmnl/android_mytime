@@ -5,6 +5,7 @@
     <string name="reset">reset</string>
     <string name="pause">pause</string>
     <string name="new_project">New Project</string>
+    <string name="project_number">Project %1$d</string>
     <string name="project_name">project name</string>
     <string name="project_name_row">project name row</string>
     <string name="times_up">"Time's up!"</string>

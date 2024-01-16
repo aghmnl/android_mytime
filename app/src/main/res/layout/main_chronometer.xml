@@ -12,6 +12,7 @@
         android:layout_height="250dp"
         android:indeterminate="false"
         android:max="100"
+        android:layout_marginTop="5dp"
         android:progressDrawable="@drawable/circular_progress_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -53,6 +54,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
+        app:tint="@color/text_button"
         android:backgroundTint="@color/button"
         android:clickable="true"
         android:contentDescription="@string/start_stop"
@@ -87,6 +89,7 @@
         android:id="@+id/editMainText"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
+        android:layout_marginTop="5dp"
         android:layout_marginStart="30dp"
         android:autofillHints="name"
         android:background="@android:color/transparent"
@@ -94,15 +97,14 @@
         android:inputType="text"
         android:maxWidth="300dp"
         android:minHeight="50dp"
-        android:text="@string/project_name"
         android:textColor="@color/text"
         android:textColorHint="@color/hint"
-        android:textSize="20sp"
+        android:textSize="22sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/mainProgressBarBackground" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <!--    <ImageButton-->
     <!--        android:id="@+id/removeMainButton"-->
@@ -135,6 +137,8 @@
         app:layout_constraintStart_toStartOf="@+id/mainProgressBarBackground"
         app:layout_constraintTop_toTopOf="@+id/mainProgressBarBackground"
         app:layout_constraintVertical_bias="1.0" />
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
