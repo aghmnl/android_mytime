@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/navigation_clock"
         android:label="@string/clock"
-        tools:layout="@layout/old_fragment_clock" />
+        tools:layout="@layout/fragment_clock" />
 
     <fragment
         android:id="@+id/navigation_time_tracker"
