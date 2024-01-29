@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_clock"
+        android:icon="@drawable/ic_clock_foreground"
+        android:title="@string/clock" />
+
+    <item
+        android:id="@+id/navigation_time_tracker"
+        android:icon="@drawable/ic_timer_foreground"
+        android:title="@string/time_tracker" />
+
+</menu>

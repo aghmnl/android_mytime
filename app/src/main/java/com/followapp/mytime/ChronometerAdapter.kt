@@ -51,7 +51,6 @@ class ChronometerAdapter(
         removeButton.contentDescription = "Remove for row $position"
 
         startStopButton.setOnClickListener {
-            // TODO: the secondary chronometers cannot be counting, only the main chronometer can
             stoppedChronometers.startAndConvertToMain(position)
         }
 

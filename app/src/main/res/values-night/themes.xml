@@ -1,5 +1,11 @@
 <resources>
     <!-- Base application theme. Night -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/color1_700</item>
+        <item name="colorPrimaryDark">@color/color1_900</item>
+        <item name="colorAccent">@color/color1_500</item>
+    </style>
     <style name="Theme.MyTime" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/color1_700</item>
