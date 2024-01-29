@@ -1,4 +1,4 @@
-package com.followapp.mytime
+package com.followapp.mytime.fragments
 
 import android.os.Bundle
 import android.os.Handler
@@ -8,11 +8,12 @@ import android.view.View
 //import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.followapp.mytime.R
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-class FirstFragment : Fragment(R.layout.fragment_clock) {
+class ClockFragment : Fragment(R.layout.fragment_clock) {
 // This takes the layout fragment_first and inflates it
 
     private lateinit var textView: TextView

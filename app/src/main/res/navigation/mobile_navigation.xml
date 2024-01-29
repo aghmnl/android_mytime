@@ -13,6 +13,6 @@
     <fragment
         android:id="@+id/navigation_time_tracker"
         android:label="@string/time_tracker"
-        tools:layout="@layout/old_fragment_time_tracker" />
+        tools:layout="@layout/fragment_time_tracker" />
 
 </navigation>

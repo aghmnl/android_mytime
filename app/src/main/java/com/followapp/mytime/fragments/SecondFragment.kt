@@ -1,9 +1,9 @@
 package com.followapp.mytime.fragments
 
 import android.os.Bundle
-import android.view.LayoutInflater
+//import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+//import android.view.ViewGroup
 import android.widget.Chronometer as ChronometerWidget
 import android.widget.EditText
 import android.widget.ImageButton
@@ -22,7 +22,7 @@ import com.followapp.mytime.dataClasses.MainChronometerViews
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.followapp.mytime.dataClasses.Chronometer
 
-class OLDTimeTrackerFragment : Fragment() {
+class SecondFragment : Fragment(R.layout.fragment_time_tracker) {
 
     // Code moved to other classes for better understanding
     private lateinit var chronometersStoredState: ChronometersStoredState
@@ -41,12 +41,12 @@ class OLDTimeTrackerFragment : Fragment() {
     // Creates the list of chronometers
     private val allChronometers = mutableListOf<Chronometer>()
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_time_tracker, container, false)
-    }
+//    override fun onCreateView(
+//        inflater: LayoutInflater, container: ViewGroup?,
+//        savedInstanceState: Bundle?
+//    ): View? {
+//        return inflater.inflate(R.layout.fragment_time_tracker, container, false)
+//    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -62,13 +62,15 @@ class OLDTimeTrackerFragment : Fragment() {
         //        removeButton = findViewById(R.id.removeMainButton)
         mainProgressBar = view.findViewById(R.id.mainProgressBar)
         editMainText = view.findViewById(R.id.editMainText)
-// ***       floatingActionButton = view.findViewById(R.id.floatingActionButton)
+        floatingActionButton = view.findViewById(R.id.floatingActionButton)
 
         val mainChronometerViews = MainChronometerViews(chronometerView, editMainText, mainProgressBar, mainStartPauseButton, resetButton)
         //        val mainChronometerViews = MainChronometerViews(chronometerView, editMainText, mainProgressBar, mainStartPauseButton, resetButton, removeButton)
-        val mainChronometerStrings = MainChronometerStrings(getString(R.string.start_stop), getString(R.string.pause))
+        val mainChronometerStrings = MainChronometerStrings(getString(R.string.start_stop), getString(
+            R.string.pause
+        ))
 
-// ***       recyclerView = view.findViewById(R.id.recyclerView)
+        recyclerView = view.findViewById(R.id.recyclerView)
 
         // Initializes the main and secondary chronometers
         mainChronometer = MainChronometer(allChronometers, mainChronometerStrings, mainChronometerViews)
