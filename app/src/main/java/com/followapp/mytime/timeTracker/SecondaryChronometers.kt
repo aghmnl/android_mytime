@@ -1,4 +1,4 @@
-package com.followapp.mytime
+package com.followapp.mytime.timeTracker
 
 import androidx.recyclerview.widget.RecyclerView
 import com.followapp.mytime.dataClasses.Chronometer

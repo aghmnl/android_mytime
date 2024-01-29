@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.followapp.mytime.fragments.ClockFragment
-import com.followapp.mytime.fragments.SecondFragment
+import com.followapp.mytime.fragments.TimeTrackerFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
@@ -16,15 +16,15 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.hide()   // To remove the ActionBar
 
         val clockFragment = ClockFragment() // links the val to the class FirstFragment
-        val secondFragment = SecondFragment()  // links the val to the class SecondFragment
+        val timeTrackerFragment = TimeTrackerFragment()  // links the val to the class SecondFragment
 
         setCurrentFragment(clockFragment)
 
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottomNavigationView)  // finds the bottomNavigationView in the activity_main by its id
         bottomNavigationView.setOnItemSelectedListener {
             when(it.itemId){
-                R.id.navigation_clock->setCurrentFragment(clockFragment)  // item id the in bottom_nav_menu.xml, sets a specific fragment as current
-                R.id.navigation_time_tracker->setCurrentFragment(secondFragment)  // item id in bottom_nav_menu.xml, sets a specific fragment as current
+                R.id.navigation_clock->setCurrentFragment(clockFragment)  // item id selected the in bottom_nav_menu.xml, sets this fragment as current
+                R.id.navigation_time_tracker->setCurrentFragment(timeTrackerFragment)  // item id selected the in bottom_nav_menu.xml, sets this fragment as current
             }
             true
         }

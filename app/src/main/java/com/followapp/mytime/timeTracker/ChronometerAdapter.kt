@@ -1,4 +1,4 @@
-package com.followapp.mytime
+package com.followapp.mytime.timeTracker
 
 import android.os.Handler
 import android.os.Looper
@@ -12,6 +12,7 @@ import android.widget.Chronometer as ChronometerWidget
 import android.widget.EditText
 import android.widget.ImageButton
 import androidx.recyclerview.widget.RecyclerView
+import com.followapp.mytime.R
 import com.followapp.mytime.dataClasses.Chronometer
 
 class ChronometerAdapter(

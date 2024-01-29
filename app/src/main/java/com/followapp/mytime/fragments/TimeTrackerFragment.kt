@@ -11,18 +11,18 @@ import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.followapp.mytime.ChronometerAdapter
-import com.followapp.mytime.ChronometersStoredState
-import com.followapp.mytime.MainChronometer
+import com.followapp.mytime.timeTracker.ChronometerAdapter
+import com.followapp.mytime.timeTracker.ChronometersStoredState
+import com.followapp.mytime.timeTracker.MainChronometer
 // I'm quite curious about this import
 import com.followapp.mytime.R
-import com.followapp.mytime.SecondaryChronometers
+import com.followapp.mytime.timeTracker.SecondaryChronometers
 import com.followapp.mytime.dataClasses.MainChronometerStrings
 import com.followapp.mytime.dataClasses.MainChronometerViews
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.followapp.mytime.dataClasses.Chronometer
 
-class SecondFragment : Fragment(R.layout.fragment_time_tracker) {
+class TimeTrackerFragment : Fragment(R.layout.fragment_time_tracker) {
 
     // Code moved to other classes for better understanding
     private lateinit var chronometersStoredState: ChronometersStoredState

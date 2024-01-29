@@ -1,7 +1,8 @@
-package com.followapp.mytime
+package com.followapp.mytime.timeTracker
 
 import android.content.Context
 import android.os.SystemClock
+import com.followapp.mytime.R
 import com.followapp.mytime.dataClasses.Chronometer
 
 
