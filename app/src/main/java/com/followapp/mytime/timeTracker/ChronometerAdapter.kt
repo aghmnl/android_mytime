@@ -1,5 +1,8 @@
 package com.followapp.mytime.timeTracker
 
+import android.app.AlertDialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Handler
 import android.os.Looper
 import android.os.SystemClock
@@ -72,7 +75,29 @@ class ChronometerAdapter(
         })
 
         removeButton.setOnClickListener {
-            stoppedChronometers.remove(position)
+            val dialog = AlertDialog.Builder(it.context, R.style.AlertDialogCustom).apply {
+//                setTitle(it.context.getString(R.string.confirmation))
+                setMessage(it.context.getString(R.string.confirmation_remove_chronometer))
+                setPositiveButton(it.context.getString(R.string.ok)) { _, _ ->
+                    stoppedChronometers.remove(position)
+                }
+                setNegativeButton(it.context.getString(R.string.cancel), null)
+            }.create()
+
+            dialog.setOnShowListener {
+                // getColor(int id, Theme theme) is used for API 23 and above, and getColor(int id) is used for lower APIs
+                val hintColor = holder.view.context.resources.getColor(R.color.hint, null)
+                dialog.getButton(AlertDialog.BUTTON_POSITIVE).apply {
+                    setTextColor(hintColor)
+                    background = ColorDrawable(Color.TRANSPARENT)
+                 }
+
+                dialog.getButton(AlertDialog.BUTTON_NEGATIVE).apply {
+                    setTextColor(hintColor)
+                    background = ColorDrawable(Color.TRANSPARENT)
+                }
+            }
+                dialog.show()
+            }
         }
     }
-}

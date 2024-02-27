@@ -1,12 +1,11 @@
-package com.followapp.mytime.timeTracker
+package com.followapp.mytime
 
 import android.content.Context
 import android.os.SystemClock
-import com.followapp.mytime.R
 import com.followapp.mytime.dataClasses.Chronometer
 
 
-class ChronometersStoredState(private val context: Context) {
+class StoredState(private val context: Context) {
     private val sharedPreferences = context.getSharedPreferences("MainActivity", Context.MODE_PRIVATE)
 
     // Saves the state in the sharedPreferences receiving a list of all the chronometers as parameter
@@ -15,7 +14,7 @@ class ChronometersStoredState(private val context: Context) {
         editor.putInt("size", chronometers.size)
         for (i in chronometers.indices) {
             editor.putLong("base_$i", chronometers[i].elapsedTime)
-            editor.putBoolean("isCounting_$i", false)
+            editor.putBoolean("isCounting_$i", chronometers[i].isCounting)  // TODO review this modification according to specs
             editor.putString("text_$i", chronometers[i].label)
         }
         editor.apply()

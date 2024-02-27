@@ -1,6 +1,7 @@
 package com.followapp.mytime.timeTracker
 
 import androidx.recyclerview.widget.RecyclerView
+import com.followapp.mytime.StoredState
 import com.followapp.mytime.dataClasses.Chronometer
 
 class SecondaryChronometers(
@@ -8,7 +9,7 @@ class SecondaryChronometers(
     private var recyclerView: RecyclerView,
     private val mainChronometer: MainChronometer
 ) {
-    private val chronometersStoredState = ChronometersStoredState(recyclerView.context)
+    private val storedState = StoredState(recyclerView.context)
 //    private val chronometerView = mainChronometerViews.chronometerView
 //    private val editMainText = mainChronometerViews.editMainText
 //    private val mainProgressBar = mainChronometerViews.mainProgressBar
@@ -30,7 +31,7 @@ class SecondaryChronometers(
 
         // Updates the sate
         allChronometers.add(chronometer)
-        chronometersStoredState.saveState(allChronometers)
+        storedState.saveState(allChronometers)
     }
 
     fun remove(position: Int) {
@@ -42,7 +43,7 @@ class SecondaryChronometers(
 
         // Updates the sate
         allChronometers.removeAt(position+1)
-        chronometersStoredState.saveState(allChronometers)
+        storedState.saveState(allChronometers)
     }
 
     fun get(position: Int): Chronometer {
@@ -52,7 +53,7 @@ class SecondaryChronometers(
     fun update(chronometer: Chronometer, position: Int) {
         stoppedChronometers[position] = chronometer
         allChronometers[position+1] = chronometer
-        chronometersStoredState.saveState(allChronometers)
+        storedState.saveState(allChronometers)
     }
 
     fun startAndConvertToMain(position: Int) {
@@ -79,6 +80,6 @@ class SecondaryChronometers(
         mainChronometer.initialize()
         mainChronometer.start()
 
-        chronometersStoredState.saveState(allChronometers)
+        storedState.saveState(allChronometers)
     }
 }

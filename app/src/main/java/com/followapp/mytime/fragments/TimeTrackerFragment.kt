@@ -1,9 +1,7 @@
 package com.followapp.mytime.fragments
 
 import android.os.Bundle
-//import android.view.LayoutInflater
 import android.view.View
-//import android.view.ViewGroup
 import android.widget.Chronometer as ChronometerWidget
 import android.widget.EditText
 import android.widget.ImageButton
@@ -12,20 +10,20 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.followapp.mytime.timeTracker.ChronometerAdapter
-import com.followapp.mytime.timeTracker.ChronometersStoredState
 import com.followapp.mytime.timeTracker.MainChronometer
 // I'm quite curious about this import
 import com.followapp.mytime.R
+import com.followapp.mytime.StoredState
 import com.followapp.mytime.timeTracker.SecondaryChronometers
 import com.followapp.mytime.dataClasses.MainChronometerStrings
 import com.followapp.mytime.dataClasses.MainChronometerViews
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.followapp.mytime.dataClasses.Chronometer
+//import com.followapp.mytime.dataClasses.ChronometerViewModel
 
-class TimeTrackerFragment : Fragment(R.layout.fragment_time_tracker) {
+class TimeTrackerFragment(private val storedState: StoredState) : Fragment(R.layout.fragment_time_tracker) {
 
     // Code moved to other classes for better understanding
-    private lateinit var chronometersStoredState: ChronometersStoredState
     private lateinit var mainChronometer: MainChronometer
     private lateinit var secondaryChronometers: SecondaryChronometers
     // Declare variables for the chronometer, buttons and progressbar
@@ -41,20 +39,14 @@ class TimeTrackerFragment : Fragment(R.layout.fragment_time_tracker) {
     // Creates the list of chronometers
     private val allChronometers = mutableListOf<Chronometer>()
 
-//    override fun onCreateView(
-//        inflater: LayoutInflater, container: ViewGroup?,
-//        savedInstanceState: Bundle?
-//    ): View? {
-//        return inflater.inflate(R.layout.fragment_time_tracker, container, false)
-//    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        // a new instance of the TimeTrackerFragment is created each time one navigates to it.
         super.onViewCreated(view, savedInstanceState)
 
         // Restores the state from SharedPreferences
-        chronometersStoredState = ChronometersStoredState(requireContext())
-        allChronometers.addAll(chronometersStoredState.restoreState())
-
+        if (allChronometers.isEmpty()) {
+            allChronometers.addAll(storedState.restoreState())
+        }
         // Initializes the chronometer, buttons and progressbar
         chronometerView = view.findViewById(R.id.mainChronometer)
         mainStartPauseButton = view.findViewById(R.id.mainStartPauseButton)
@@ -96,6 +88,6 @@ class TimeTrackerFragment : Fragment(R.layout.fragment_time_tracker) {
     override fun onPause() {
         super.onPause()
         // Saves the state to SharedPreferences
-        chronometersStoredState.saveState(allChronometers)
+        storedState.saveState(allChronometers)
     }
 }

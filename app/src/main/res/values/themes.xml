@@ -19,21 +19,24 @@
         <item name="colorSecondaryVariant">@color/color1_500</item>
         <item name="colorOnSecondary">@color/color1_950</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <item name="editTextStyle">@style/EditTextStyle</item>
         <item name="android:textViewStyle">@style/TextViewStyle</item>
         <!-- Customize your theme here. -->
     </style>
 
     <style name="EditTextStyle" parent="android:Widget.EditText">
-        <item name="fontFamily">@font/red_hat_display</item>
+        <item name="android:fontFamily">@font/red_hat_display</item>
     </style>
     <style name="TextViewStyle" parent="android:Widget.TextView">
-        <item name="fontFamily">@font/red_hat_display</item>
+        <item name="android:fontFamily">@font/red_hat_display</item>
     </style>
     <style name="ChronometerStyle">
-        <item name="fontFamily">@font/red_hat_display</item>
-        <item name="color">@color/text</item>
+        <item name="android:fontFamily">@font/red_hat_display</item>
+        <item name="android:color">@color/text</item>
+    </style>
+    <style name="AlertDialogCustom" parent="Theme.MaterialComponents.Light.Dialog.Alert">
+        <item name="android:textColorPrimary">@color/text</item>
+        <item name="android:background">@color/background</item>
     </style>
 
 </resources>

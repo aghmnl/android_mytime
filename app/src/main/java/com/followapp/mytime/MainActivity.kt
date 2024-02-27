@@ -8,17 +8,24 @@ import com.followapp.mytime.fragments.TimeTrackerFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
+
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var storedState: StoredState
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main) // Is not using the id but the layout name
 
         supportActionBar?.hide()   // To remove the ActionBar
 
-        val clockFragment = ClockFragment() // links the val to the class FirstFragment
-        val timeTrackerFragment = TimeTrackerFragment()  // links the val to the class SecondFragment
+        // Restores the state from SharedPreferences
+        storedState = StoredState(this)
 
-        setCurrentFragment(clockFragment)
+        val clockFragment = ClockFragment() // links the val to the class ClockFragment
+        val timeTrackerFragment = TimeTrackerFragment(storedState)  // links the val to the class TimeTrackerFragment
+
+        setCurrentFragment(timeTrackerFragment)  // Selects the fragment to be shown
 
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottomNavigationView)  // finds the bottomNavigationView in the activity_main by its id
         bottomNavigationView.setOnItemSelectedListener {
@@ -28,7 +35,6 @@ class MainActivity : AppCompatActivity() {
             }
             true
         }
-
     }
 
     private fun setCurrentFragment(fragment:Fragment)=

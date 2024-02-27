@@ -8,5 +8,4 @@ data class Chronometer(var elapsedTime: Long, var isCounting: Boolean, val label
     fun setIsCounting(newIsCounting: Boolean) {
         isCounting = newIsCounting
     }
-
 }
