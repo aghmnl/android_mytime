@@ -33,6 +33,7 @@ class StoredState(private val context: Context) {
         } else {
             chronometers.add(Chronometer(0, false, context.getString(R.string.new_project)))
         }
+
         return chronometers
     }
 }

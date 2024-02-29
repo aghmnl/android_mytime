@@ -19,12 +19,12 @@ import com.followapp.mytime.R
 import com.followapp.mytime.dataClasses.Chronometer
 
 class ChronometerAdapter(
-        private val stoppedChronometers: SecondaryChronometers
-    ) : RecyclerView.Adapter<ChronometerAdapter.ChronometerViewHolder>() {
+    private val secondaryChronometers: SecondaryChronometers
+) : RecyclerView.Adapter<ChronometerAdapter.ChronometerViewHolder>() {
 
-    class ChronometerViewHolder(val view: View): RecyclerView.ViewHolder(view)
+    class ChronometerViewHolder(val view: View) : RecyclerView.ViewHolder(view)
 
-    override fun getItemCount() = stoppedChronometers.getSize()
+    override fun getItemCount() = secondaryChronometers.getSize()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChronometerViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -33,21 +33,21 @@ class ChronometerAdapter(
     }
 
     override fun onBindViewHolder(holder: ChronometerViewHolder, position: Int) {
-        val chronometer = holder.view.findViewById<ChronometerWidget>(R.id.mainChronometer)
+        val mainChronometer = holder.view.findViewById<ChronometerWidget>(R.id.mainChronometer)
         val startStopButton = holder.view.findViewById<ImageButton>(R.id.startStopButton)
         val editText = holder.view.findViewById<EditText>(R.id.editText)
         val removeButton = holder.view.findViewById<ImageButton>(R.id.removeButton)
 
         // Restore the state
-        val (elapsedTime, isCounting, text) = stoppedChronometers.get(position)
-        chronometer.base = SystemClock.elapsedRealtime() - elapsedTime
+        val (elapsedTime, isCounting, text) = secondaryChronometers.get(position)
+        mainChronometer.base = SystemClock.elapsedRealtime() - elapsedTime
 
         val handler = Handler(Looper.getMainLooper())
 
-        if (text !== "" ) {
+        if (text !== "") {
             editText.setText(text)
         } else {
-            val projectString = holder.view.context.getString(R.string.project_number, position+1)
+            val projectString = holder.view.context.getString(R.string.project_number, position + 1)
             editText.setText(projectString)
         }
         // Set a unique content description for each EditText and each button
@@ -55,20 +55,38 @@ class ChronometerAdapter(
         removeButton.contentDescription = "Remove for row $position"
 
         startStopButton.setOnClickListener {
-            stoppedChronometers.startAndConvertToMain(position)
+            secondaryChronometers.startAndConvertToMain(position)
         }
 
-        editText.addTextChangedListener(object: TextWatcher {
+        // This is to perform after the text was edited
+        editText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
 
+            // When an EditText loses focus, it triggers the onTextChanged method. This can happen an item is removed or added from/to the RecyclerView
+            // This was generating an IndexOutOfBoundsException because it was sending a -1 position to the secondaryChronometers.update
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                // It takes the new text as a parameter and saves it in the state
-                val runnable = Runnable {
-                    stoppedChronometers.update(Chronometer(SystemClock.elapsedRealtime() - chronometer.base, isCounting, s.toString()), holder.adapterPosition)
-                }
 
-                handler.removeCallbacksAndMessages(null) // Cancel the previous delay
-                handler.postDelayed(runnable, 300) // Start a new delay
+                // This checks that the function was not triggered because of removal or addition of rows.
+                if (editText.hasFocus()) {
+                    // It takes the new text as a parameter and saves it in the state
+                    val runnable = Runnable {
+                        val adapterPosition = holder.adapterPosition
+                        if (adapterPosition != RecyclerView.NO_POSITION) {  // TODO remove this line because editText.hasFocus() is already taking care of not having -1 position
+                            secondaryChronometers.update(
+                                Chronometer(
+                                    SystemClock.elapsedRealtime() - mainChronometer.base,
+                                    isCounting,
+                                    s.toString()
+                                ), adapterPosition
+                            )
+                        }
+                    }
+
+                    handler.removeCallbacksAndMessages(null) // Cancel the previous delay
+                    handler.postDelayed(runnable, 300) // Start a new delay
+                } else {
+                    println("Preventing IndexOutOfBoundsException!!!!")
+                }
             }
 
             override fun afterTextChanged(s: Editable) {}
@@ -79,7 +97,7 @@ class ChronometerAdapter(
 //                setTitle(it.context.getString(R.string.confirmation))
                 setMessage(it.context.getString(R.string.confirmation_remove_chronometer))
                 setPositiveButton(it.context.getString(R.string.ok)) { _, _ ->
-                    stoppedChronometers.remove(position)
+                    secondaryChronometers.remove(position)
                 }
                 setNegativeButton(it.context.getString(R.string.cancel), null)
             }.create()
@@ -90,14 +108,14 @@ class ChronometerAdapter(
                 dialog.getButton(AlertDialog.BUTTON_POSITIVE).apply {
                     setTextColor(hintColor)
                     background = ColorDrawable(Color.TRANSPARENT)
-                 }
+                }
 
                 dialog.getButton(AlertDialog.BUTTON_NEGATIVE).apply {
                     setTextColor(hintColor)
                     background = ColorDrawable(Color.TRANSPARENT)
                 }
             }
-                dialog.show()
-            }
+            dialog.show()
         }
     }
+}

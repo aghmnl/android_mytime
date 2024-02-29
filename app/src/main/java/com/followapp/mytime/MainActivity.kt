@@ -37,10 +37,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun setCurrentFragment(fragment:Fragment)=
-        supportFragmentManager.beginTransaction().apply {
+    // This function replaces the fragment in activity_main.xml by the one indicated by params
+    private fun setCurrentFragment(fragment: Fragment) = supportFragmentManager.beginTransaction().apply {
             replace(R.id.flFragment,fragment)  // this name is the given to the FrameLayout in activity_main.xml
             commit()
         }
+
 
 }

@@ -53,7 +53,7 @@ class TimeTrackerFragment(private val storedState: StoredState) : Fragment(R.lay
         resetButton = view.findViewById(R.id.resetButton)
         //        removeButton = findViewById(R.id.removeMainButton)
         mainProgressBar = view.findViewById(R.id.mainProgressBar)
-        editMainText = view.findViewById(R.id.editMainText)
+        editMainText = view.findViewById(R.id.mainEditText)
         floatingActionButton = view.findViewById(R.id.floatingActionButton)
 
         val mainChronometerViews = MainChronometerViews(chronometerView, editMainText, mainProgressBar, mainStartPauseButton, resetButton)

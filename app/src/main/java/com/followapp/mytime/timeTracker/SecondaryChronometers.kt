@@ -50,15 +50,20 @@ class SecondaryChronometers(
         return stoppedChronometers[position]
     }
 
+    // This is used just for debugging purposes
+    fun getAll(): MutableList<Chronometer> {
+        return stoppedChronometers
+    }
+
     fun update(chronometer: Chronometer, position: Int) {
-        stoppedChronometers[position] = chronometer
-        allChronometers[position+1] = chronometer
-        storedState.saveState(allChronometers)
+            stoppedChronometers[position] = chronometer
+            allChronometers[position+1] = chronometer
+            storedState.saveState(allChronometers)
     }
 
     fun startAndConvertToMain(position: Int) {
         // This stops the main chronometer when converting the secondary chronometer into a main one
-        if(allChronometers[0].isCounting) mainChronometer.stop()
+        if (allChronometers[0].isCounting) mainChronometer.stop()
 
         val newMainChronometer = stoppedChronometers.removeAt(position)
         val oldMainChronometer = allChronometers[0]
