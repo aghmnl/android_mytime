@@ -19,6 +19,8 @@ import com.followapp.mytime.dataClasses.MainChronometerStrings
 import com.followapp.mytime.dataClasses.MainChronometerViews
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.followapp.mytime.dataClasses.Chronometer
+import com.followapp.mytime.Utilities.Companion.hideKeyboard
+
 //import com.followapp.mytime.dataClasses.ChronometerViewModel
 
 class TimeTrackerFragment(private val storedState: StoredState) : Fragment(R.layout.fragment_time_tracker) {
@@ -65,7 +67,7 @@ class TimeTrackerFragment(private val storedState: StoredState) : Fragment(R.lay
         recyclerView = view.findViewById(R.id.recyclerView)
 
         // Initializes the main and secondary chronometers
-        mainChronometer = MainChronometer(allChronometers, mainChronometerStrings, mainChronometerViews)
+        mainChronometer = MainChronometer(requireContext(), allChronometers, mainChronometerStrings, mainChronometerViews)
         mainChronometer.initialize()
         secondaryChronometers = SecondaryChronometers(allChronometers, recyclerView, mainChronometer)
 
@@ -85,9 +87,18 @@ class TimeTrackerFragment(private val storedState: StoredState) : Fragment(R.lay
         }
     }
 
+
+
     override fun onPause() {
         super.onPause()
         // Saves the state to SharedPreferences
         storedState.saveState(allChronometers)
+
+        // TODO: It’s often better to handle the visibility of the keyboard in response to specific user actions or events,
+        //  rather than hiding it every time the app is paused.
+        // TODO: be aware that using static methods and passing around Activity can lead to memory leaks if not handled carefully.
+        //  Always null-check and avoid keeping long-lived references to an Activity.
+        // Apparently this was required to avoid a showing keyboard when opening the app. This behaviour couldn't be replicated.
+        activity?.let { hideKeyboard(it) }
     }
 }
