@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "735458410259",
+    "project_id": "followapp-mytime",
+    "storage_bucket": "followapp-mytime.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:735458410259:android:cf3f19da0a432bfd84e4e6",
+        "android_client_info": {
+          "package_name": "com.followapp.mytime"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB3EqPdIJ_XzePaWdaO2tbRxsyNhus64Zs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

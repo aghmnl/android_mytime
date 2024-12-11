@@ -9,4 +9,10 @@ data class Chronometer(var elapsedTime: Long, var isCounting: Boolean, val label
         isCounting = newIsCounting
     }
 
+    // This is used just for debugging purposes
+    fun print() {
+        println("Elapsed time: $elapsedTime, ${if (isCounting) "started" else "stopped"}, $label")
+    }
+
+
 }

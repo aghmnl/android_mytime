@@ -1,11 +1,15 @@
-package com.followapp.mytime
+package com.followapp.mytime.timeTracker
 
+import android.content.Context
 import android.os.SystemClock
+import com.followapp.mytime.R
+import com.followapp.mytime.Utilities.Companion.createAlertDialog
 import com.followapp.mytime.dataClasses.Chronometer
 import com.followapp.mytime.dataClasses.MainChronometerStrings
 import com.followapp.mytime.dataClasses.MainChronometerViews
 
 class MainChronometer(
+    private val context: Context,
     private val allChronometers: MutableList<Chronometer>,
     mainChronometerStrings: MainChronometerStrings,
     mainChronometerViews: MainChronometerViews,
@@ -70,8 +74,15 @@ class MainChronometer(
 
     fun setResetButtonClickListener() {
         resetButton.setOnClickListener {
-            chronometerView.base = SystemClock.elapsedRealtime()  // Returns to 0 the time shown
-            stop()
+            createAlertDialog(
+                context,
+                context.getString(R.string.confirmation_reset_chronometer),
+                context.getString(R.string.ok),
+                context.getString(R.string.cancel)
+            ) {
+                chronometerView.base = SystemClock.elapsedRealtime()  // Returns to 0 the time shown
+                stop()
+            }
         }
     }
 

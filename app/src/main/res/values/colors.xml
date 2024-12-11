@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--    FollowApp Color Palette -->
     <color name="color1_50">#fffde7</color>
     <color name="color1_100">#fff9c4</color>
     <color name="color1_300">#fff176</color>
@@ -7,10 +8,21 @@
     <color name="color1_700">#fbc02d</color>
     <color name="color1_900">#695F00</color>
     <color name="color1_950">#3E3800</color>
-    <color name="text">@color/color1_950</color>
-    <color name="hint">@color/color1_900</color>
-    <color name="button">@color/color1_900</color>
-    <color name="text_button">@color/color1_100</color>
-    <color name="background">@color/color1_100</color>
-    <color name="line">@color/color1_50</color>
+
+<!--    Standardizing color naming for this app-->
+    <color name="color_50">@color/color1_50</color>
+    <color name="color_100">@color/color1_100</color>
+    <color name="color_300">@color/color1_300</color>
+    <color name="color_500">@color/color1_500</color>
+    <color name="color_700">@color/color1_700</color>
+    <color name="color_900">@color/color1_900</color>
+    <color name="color_950">@color/color1_950</color>
+
+    <!--    Standard color references-->
+    <color name="text">@color/color_950</color>
+    <color name="hint">@color/color_900</color>
+    <color name="button">@color/color_900</color>
+    <color name="text_button">@color/color_100</color>
+    <color name="background">@color/color_100</color>
+    <color name="line">@color/color_50</color>
 </resources>

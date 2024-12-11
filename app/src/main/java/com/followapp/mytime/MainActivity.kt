@@ -1,88 +1,46 @@
 package com.followapp.mytime
 
-import android.os.Bundle
-import android.widget.Chronometer as ChronometerWidget
-import android.widget.EditText
-import android.widget.ImageButton
-import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.followapp.mytime.dataClasses.MainChronometerStrings
-import com.followapp.mytime.dataClasses.MainChronometerViews
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.followapp.mytime.dataClasses.Chronometer
+import android.os.Bundle
+import androidx.fragment.app.Fragment
+import com.followapp.mytime.fragments.ClockFragment
+import com.followapp.mytime.fragments.TimeTrackerFragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
+
 
 
 class MainActivity : AppCompatActivity() {
 
-    // Code moved to other classes for better understanding
-    private lateinit var chronometersStoredState: ChronometersStoredState
-    private lateinit var mainChronometer: MainChronometer
-    private lateinit var secondaryChronometers: SecondaryChronometers
-    // Declare variables for the chronometer, buttons and progressbar
-    private lateinit var chronometerView: ChronometerWidget
-    private lateinit var editMainText: EditText
-    private lateinit var mainProgressBar: ProgressBar
-    private lateinit var mainStartPauseButton: ImageButton
-    private lateinit var resetButton: ImageButton
-    //    private lateinit var removeButton: ImageButton
-    private lateinit var recyclerView: RecyclerView
-    private lateinit var floatingActionButton: FloatingActionButton
-
-    // Creates the list of chronometers
-    private val allChronometers = mutableListOf<Chronometer>()
-
+    private lateinit var storedState: StoredState
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_main) // Is not using the id but the layout name
 
-        // To remove the ActionBar
-        supportActionBar?.hide()
+        supportActionBar?.hide()   // To remove the ActionBar
 
         // Restores the state from SharedPreferences
-        chronometersStoredState = ChronometersStoredState(this)
-        allChronometers.addAll(chronometersStoredState.restoreState())
+        storedState = StoredState(this)
 
-        // Initializes the chronometer, buttons and progressbar
-        chronometerView = findViewById(R.id.mainChronometer)
-        mainStartPauseButton = findViewById(R.id.mainStartPauseButton)
-        resetButton = findViewById(R.id.resetButton)
-//        removeButton = findViewById(R.id.removeMainButton)
-        mainProgressBar = findViewById(R.id.mainProgressBar)
-        editMainText = findViewById(R.id.editMainText)
-        floatingActionButton = findViewById(R.id.floatingActionButton)
+        val clockFragment = ClockFragment() // links the val to the class ClockFragment
+        val timeTrackerFragment = TimeTrackerFragment(storedState)  // links the val to the class TimeTrackerFragment
 
-        val mainChronometerViews = MainChronometerViews(chronometerView, editMainText, mainProgressBar, mainStartPauseButton, resetButton)
-//        val mainChronometerViews = MainChronometerViews(chronometerView, editMainText, mainProgressBar, mainStartPauseButton, resetButton, removeButton)
-        val mainChronometerStrings = MainChronometerStrings(getString(R.string.start_stop), getString(R.string.pause))
+        setCurrentFragment(timeTrackerFragment)  // Selects the fragment to be shown
 
-        recyclerView = findViewById(R.id.recyclerView)
-
-        // Initializes the main and secondary chronometers
-        mainChronometer = MainChronometer(allChronometers, mainChronometerStrings, mainChronometerViews)
-        mainChronometer.initialize()
-        secondaryChronometers = SecondaryChronometers(allChronometers, recyclerView, mainChronometer)
-
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = ChronometerAdapter(secondaryChronometers)
-
-        // Sets the listeners
-        mainChronometer.setStartPauseButtonClickListener()
-        mainChronometer.setResetButtonClickListener()
-        mainChronometer.setChronometerTickListener()
-//        mainChronometer.setRemoveButtonClickListener()
-
-        floatingActionButton.setOnClickListener {
-            // Adds a new chronometer to the list
-            secondaryChronometers.addChronometer(Chronometer(0, false, ""))
+        val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottomNavigationView)  // finds the bottomNavigationView in the activity_main by its id
+        bottomNavigationView.setOnItemSelectedListener {
+            when(it.itemId){
+                R.id.navigation_clock->setCurrentFragment(clockFragment)  // item id selected the in bottom_nav_menu.xml, sets this fragment as current
+                R.id.navigation_time_tracker->setCurrentFragment(timeTrackerFragment)  // item id selected the in bottom_nav_menu.xml, sets this fragment as current
+            }
+            true
         }
     }
 
-    override fun onPause() {
-        super.onPause()
-        // Saves the state to SharedPreferences
-        chronometersStoredState.saveState(allChronometers)
-    }
+    // This function replaces the fragment in activity_main.xml by the one indicated by params
+    private fun setCurrentFragment(fragment: Fragment) = supportFragmentManager.beginTransaction().apply {
+            replace(R.id.flFragment,fragment)  // this name is the given to the FrameLayout in activity_main.xml
+            commit()
+        }
+
 }
