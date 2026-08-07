@@ -5,14 +5,14 @@ plugins {
 
 android {
     namespace = "com.followapp.mytime"
-    compileSdk = 34
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.followapp.mytime"
         minSdk = 25
-        targetSdk = 34
-        versionCode = 12
-        versionName = "1.1.12"
+        targetSdk = 36
+        versionCode = 13
+        versionName = "1.1.13"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
