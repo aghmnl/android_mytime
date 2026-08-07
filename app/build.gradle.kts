@@ -1,6 +1,13 @@
+import java.util.Properties
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+}
+
+val secrets = Properties().apply {
+    val file = rootProject.file("local.properties")
+    if (file.exists()) load(file.inputStream())
 }
 
 android {
@@ -17,30 +24,36 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    signingConfigs {
+        create("release") {
+            // Upload keystore path + credentials live in local.properties
+            // (git-ignored). When absent — CI, or a dev who only builds debug —
+            // release builds are produced unsigned, which is fine for local R8
+            // checks. A real release needs all four set.
+            val storeFilePath = secrets.getProperty("RELEASE_STORE_FILE", "")
+            if (storeFilePath.isNotEmpty()) {
+                storeFile = file(storeFilePath)
+                storePassword = secrets.getProperty("RELEASE_STORE_PASSWORD", "")
+                keyAlias = secrets.getProperty("RELEASE_KEY_ALIAS", "")
+                keyPassword = secrets.getProperty("RELEASE_KEY_PASSWORD", "")
+            }
+        }
+    }
+
     buildTypes {
         release {
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-        }
-        getByName("release") {
-            // Enables code shrinking, obfuscation, and optimization for only
-            // your project's release build type.
+            // Enables code shrinking, obfuscation, and optimization.
             isMinifyEnabled = true
-
-            // Enables resource shrinking, which is performed by the
-            // Android Gradle plugin.
+            // Enables resource shrinking, performed by the Android Gradle plugin.
             isShrinkResources = true
-
-            // Includes the default ProGuard rules files that are packaged with
-            // the Android Gradle plugin. To learn more, go to the section about
-            // R8 configuration files.
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            // Sign with the upload key when configured; otherwise unsigned.
+            if (secrets.getProperty("RELEASE_STORE_FILE", "").isNotEmpty()) {
+                signingConfig = signingConfigs.getByName("release")
+            }
         }
     }
     compileOptions {
