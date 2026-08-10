@@ -11,6 +11,13 @@ build/
 # Local configuration file (sdk path, etc)
 local.properties
 
+# Signing keystores — never commit; keep outside the repo
+*.jks
+*.keystore
+
+# Firebase config — project-specific, keep out of VCS
+google-services.json
+
 # Android Studio generated files
 .cxx
 

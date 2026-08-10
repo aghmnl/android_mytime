@@ -1,22 +1,43 @@
+import java.util.Properties
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-    id("com.google.gms.google-services")
-    id("com.google.firebase.crashlytics")
+}
+
+val secrets = Properties().apply {
+    val file = rootProject.file("local.properties")
+    if (file.exists()) load(file.inputStream())
 }
 
 android {
     namespace = "com.followapp.mytime"
-    compileSdk = 34
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.followapp.mytime"
         minSdk = 25
-        targetSdk = 34
-        versionCode = 14
-        versionName = "1.2.0"
+        targetSdk = 36
+        versionCode = 15
+        versionName = "1.2.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    signingConfigs {
+        create("release") {
+            // Upload keystore path + credentials live in local.properties
+            // (git-ignored). When absent — CI, or a dev who only builds debug —
+            // release builds are produced unsigned, which is fine for local R8
+            // checks. A real release needs all four set.
+            val storeFilePath = secrets.getProperty("RELEASE_STORE_FILE", "")
+            if (storeFilePath.isNotEmpty()) {
+                storeFile = file(storeFilePath)
+                storePassword = secrets.getProperty("RELEASE_STORE_PASSWORD", "")
+                keyAlias = secrets.getProperty("RELEASE_KEY_ALIAS", "")
+                keyPassword = secrets.getProperty("RELEASE_KEY_PASSWORD", "")
+            }
+        }
     }
 
     buildTypes {
@@ -36,6 +57,10 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            // Sign with the upload key when configured; otherwise unsigned.
+            if (secrets.getProperty("RELEASE_STORE_FILE", "").isNotEmpty()) {
+                signingConfig = signingConfigs.getByName("release")
+            }
         }
     }
     compileOptions {
@@ -59,7 +84,6 @@ dependencies {
 
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.7")
     implementation("androidx.navigation:navigation-ui-ktx:2.7.7")
-    implementation("com.google.firebase:firebase-crashlytics:19.0.0")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
