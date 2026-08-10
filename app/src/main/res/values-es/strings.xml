@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MyTime</string>
+    <string name="start_stop">reproducir/parar</string>
+    <string name="stop">parar</string>
+    <string name="reset">resetear</string>
+    <string name="pause">pausar</string>
+    <string name="new_project">Nuevo Proyecto</string>
+    <string name="project_name">nombre del proyecto</string>
+    <string name="times_up">Tiempo finalizado!</string>
+</resources>
